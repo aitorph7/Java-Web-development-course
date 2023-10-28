@@ -7,3 +7,5 @@ nueva modificación para ver qué tal se comporta VS Code con 2 carpetas abierta
 Modificación 1.1
 
 modificación 1
+
+modificación 2.1
