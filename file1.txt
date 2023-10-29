@@ -2,7 +2,8 @@ primer archivo de texto para subir a Github
 Modificación del archivo para el primer Commit
 Modoficación desde GitHub para hacer un Pull
 Nueva Modificación para hacer un Push
-nueva modificación para ver qué tal se comporta VS Code con 2 carpetas abiertas en el Workspace
+nueva modificación para ver qué tal se comporta VS Code con 2 carpetas abiertas
+en el Workspace o área de trabajo.
 
 Modificación 1.1
 
