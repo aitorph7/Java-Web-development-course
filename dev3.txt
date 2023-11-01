@@ -1,2 +1,5 @@
 Nuevo desarrollo de funcionalidades
 en paralelo a la rama 'main'
+
+Voy a probar la nueva ectensión 'Github
+Pull Requests and Issues' con este añadido.
