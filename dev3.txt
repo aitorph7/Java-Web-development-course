@@ -1,0 +1,2 @@
+Nuevo desarrollo de funcionalidades
+en paralelo a la rama 'main'
