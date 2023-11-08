@@ -1,4 +1,4 @@
-Algoritmo EstructuraControlWhy_Reverse
+Algoritmo EstructuraControlWhile_Reverse
 	contador <- 10
 	Mientras contador > 0 Hacer
 		Escribir "Hola Mundo " , contador

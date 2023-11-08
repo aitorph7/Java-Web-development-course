@@ -1,4 +1,4 @@
-Algoritmo EStructura_Control_Why
+Algoritmo EStructura_Control_While
 	contador <- 1
 	Mientras contador < 10 Hacer
 		Escribir "Hola Mundo " , contador
