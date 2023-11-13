@@ -5,11 +5,11 @@ Algoritmo EstructurasControl_BucleFor
 	//incial (start), final (stop) y paso (step).
 	
 	Para indice <-0 Hasta 15 Con Paso 1 Hacer
-		Escribir "Iteración número " , indice
+		Escribir "Iteracion numero " , indice
 	Fin Para
 	
 	Para indice <- 15 Hasta 1 Con Paso -1 Hacer
-		Escribir "Cuenta atrás " , indice
+		Escribir "Cuenta atras " , indice
 	Fin Para
 	
 	Repetir
