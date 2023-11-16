@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/backend" method="post">
+
+        <div>
+            <label for="firstName">Nombre</label>
+            <input type="text" name="firstName" id="firstName">
+        </div>
+
+        <div>
+            <label for="lastname">Apellido</label>
+            <input type="text" name="lastname" id="lastname" value="García">
+        </div>
+
+        <div>
+            <label for="NIF">NIF/NIE</label>
+            <input type="text" name="NIF" id="NIF" placeholder="12345678A">
+        </div>
+
+        <div>
+            <label for="phone">Teléfono</label>
+            <input type="text" name="phone" id="phone" placeholder="+34123456789">
+        </div>
+
+        <div>
+            <label for="correo">Coreo Electrónico</label>
+            <input type="email" name="email" id="correo">
+        </div>
+
+        <div>
+            <label for="edad">Edad</label>
+            <input type="number" name="edad" id="edad">
+        </div>
+        
+        <div>
+            <label for="salary">Salario</label>
+            <input type="number" name="salario" id="salary" step="50">
+        </div>
+
+        <div>
+            <label for="weight">Peso (kg)</label>
+            <input type="number" name="peso" id="weight" step="0.1">
+        </div>
+
+        <div>
+            <label for="height">Altura (cm)</label>
+            <input type="number" name="altura" id="height" step="1" min="50" max="240">
+        </div>
+
+        <div>
+            <input type="checkbox" name="terms" id="terms" required>
+            <label for="terms">He leído y acepto los
+                <a href="#">términos y condiciones.</a>
+            </label>
+        </div>
+
+        <div class="genderCont">
+            <input type="radio" name="gender" id="male" value="male" >
+            <label for="male">Masculino</label>
+            
+            <input type="radio" name="gender" id="female" value="female" >
+            <label for="female">Femenino</label>
+            
+            <input type="radio" name="gender" id="Other" value="Other" >
+            <label for="Other">Otro</label>
+        </div>
+
+        <div>
+            <label for="bio">Biografía</label>
+            <textarea name="bio" id="" cols="52" rows="10"></textarea>
+        </div>
+
+        <button type="submit">Enviar</button>
+        <!--el type="submit" es para indicarle al servidor que es un
+        boton de enviar-->
+
+    </form>
+</body>
+</html>
