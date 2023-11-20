@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/backend" method="post">
+   
+        <div>
+            <label for="company">Empresa: </label>
+            <select name="company" id="company">
+                <option value="" disabled selected>Seleccionar empresa</option>
+                <option value="adecco">Fundacion Adecco</option>
+                <option value="certidevs">CertiDevs</option>
+                <option value="cosmicDevelopments">Cosmic Developments</option>
+            </select>
+        </div>
+
+
+        <div>
+            <label for="knowledge">Lenguajes de programacion conocidos:</label>
+            <select name="knowledge" id="knowledge" multiple>
+                <option value="" disabled selected>Seleccionar lenguaje</option>
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+            </select>
+        </div>
+
+
+        <div>
+            <label for="pass">Contraseña</label>
+            <input type="password" name="pass" id="pass">
+            <button type="button" onclick="showPassword()">Mostrar password</button>
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        function showPassword() {
+            let passInput = document.getElementById('pass');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+            } else {
+                passInput.type = 'password';
+            }
+        }
+    </script>
+
+
+</body>
+</html>
