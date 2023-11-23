@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+
+    <style>
+        .bg-welcome {
+            background-image: url('https://placehold.co/2000');
+            background-position: center;
+            background-size: cover;
+            padding-top:250px;
+            padding-bottom: 250px;
+        }
+    </style>
+</head>
+  <body>
+    
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">
+                <img src="img/logo-losmaquinas.png" alt="Logo" width="250" class="d-inline-block align-text-top">
+              </a>
+
+              <!-- Menu de hamburguesa, solo aparece en movil y tablet -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button> 
+
+              <!-- Div con enlaces de navegación que se oculta automaticamente y se muestra con el menú hamburguesa-->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Ofertas</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Categorías
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Relojes</a></li>
+                      <li><a class="dropdown-item" href="#">Chaquetas</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Deportes</a></li>
+                    </ul>
+
+                    
+                  </li>
+                  
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-secondary" type="button" onclick="toggleTheme()">Cambiar tema</button>
+                  <button class="btn btn-primary ms-2" type="button">Login</button>
+                  <button class="btn btn-success ms-2" type="button">Registro</button>
+                </div>
+              </div>
+
+            </div>
+          </nav>
+    </header>
+
+    <div class="bg-welcome text-center">
+        <h1>🎉Welcome to Black Friday🥳</h1>
+        <p>Best offers in Internet</p>
+    </div>
+
+        <div class="container mt-5">
+
+            <!-- <div class="row text-center mb-5 bg-welcome">
+                <div class="col">
+                    <h1>🎉Welcome to Black Friday🥳</h1>
+                    <p>Best offers in Internet</p>
+                </div>
+            </div> -->
+
+
+            <div class="row">
+                <div class="col">
+                    <h3>Silla básica SteelCase</h3>
+                    <img src="https://placehold.co/2000" class="img-fluid rounded-3" alt="Imagen silla" style="max-width:300px;">
+                    <p>Silla con acero valirio forjada en el monte del destino. Bastante cara.</p>
+                    <button type="button" class="btn btn-success">Comprar por 499,99 €</button>
+                </div>
+                <div class="col">
+                    <h3>Silla ergonómica SteelCase</h3>
+                    <img src="https://placehold.co/300" class="img-fluid rounded-3" alt="Imagen silla">
+                    <p>Silla con acero valirio forjada en el monte del destino. Bastante cara.</p>
+                    <button type="button" class="btn btn-success">Comprar por 899,99 €</button>
+                </div>
+                <div class="col">
+                    <h3>Silla premium SteelCase</h3>
+                    <img src="https://placehold.co/300" class="img-fluid rounded-3" alt="Imagen silla">
+                    <p>Silla con acero valirio forjada en el monte del destino. Bastante cara.</p>
+                    <button type="button" class="btn btn-success">Comprar por 999,99 €</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container mt-5 border-top" >
+            <footer class="py-5" >
+              <div class="row">
+                <div class="col-6 col-md-2 mb-3">
+                  <h5>Categorías</h5>
+                  <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pantalones</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Chaquetas</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Relojes</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Bolsos</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Calzado</a></li>
+                  </ul>
+                </div>
+          
+                <div class="col-6 col-md-2 mb-3">
+                  <h5>Servicios</h5>
+                  <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Desarrollo</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Consultoría</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Formación</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Estrategia</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ventas</a></li>
+                  </ul>
+                </div>
+          
+                <div class="col-6 col-md-2 mb-3">
+                  <h5>Información legal</h5>
+                  <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Aviso legal</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Política de cookies</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Términos y condiciones</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Política de devoluciones</a></li>
+                  </ul>
+                </div>
+          
+                <div class="col-md-5 offset-md-1 mb-3">
+                  <form>
+                    <h5>¡Apúntate a nuestra Newsletter semanal!</h5>
+                    <p>Enviamos código fresco todas las noches</p>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                      <label for="newsletter1" class="visually-hidden">Email address</label>
+                      <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                      <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          
+
+              <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <p class="col-md-4 mb-0 text-body-secondary">© 2023 LosMaquinas S.L.</p>
+            
+                <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <img src="img/logo-losmaquinas.png" alt="Logo" width="250" class="d-inline-block align-text-top">
+                </a>
+            
+                <ul class="nav col-md-4 justify-content-end">
+                  <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+                </ul>
+              </div>
+
+            </footer>
+          </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        function toggleTheme(){
+            // let html = document.getElementsByTagName('html')[0];
+            let html = document.documentElement;
+            if (html.getAttribute('data-bs-theme') === 'dark') {
+                html.setAttribute('data-bs-theme', 'light');
+            } else {
+                html.setAttribute('data-bs-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html> 
