@@ -169,3 +169,47 @@ elif nivel == 3:
         
 else:
     print('Máquina')
+    
+  # OPERADOR TERNARIO
+  
+numero = -10
+numero_absoluto = None
+
+  # if else normal
+
+if numero <= 0:
+    numero_absoluto = -numero
+else: 
+    numero_absoluto = numero
+print(numero_absoluto)
+
+
+  # Operador ternario: if else en una línea
+numero_absoluto = -numero if numero <= 0 else numero
+
+  # RECOMENDACIÓN: usarlo solo en casos sencillos para evitar que la 
+  # sentencia se vuelva muy compleja
+
+  ## Otras opciones: Opción 1 - nativa abs(), Opción 2 - buscar en numpy
+  
+  
+  #BUCLE WHILE
+  
+contador = 0
+
+while contador < 10:
+    print(f'contador: {contador}')
+    contador += 1
+    
+print('fin')
+
+
+# Aplicar una transformación sobre cada elemento de una lista
+precios = [5.99, 10.99, 4.32, 8.76]
+contador = 0
+
+while contador < len(precios):
+    precios[contador] *= 0.80 # descuento 20 %
+    contador += 1
+
+print(precios)
