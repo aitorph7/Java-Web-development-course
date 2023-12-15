@@ -158,6 +158,9 @@ print(f'Número aprobados: {numero_aprobados}')
 print(f'Número suspensos: {numero_suspensos}')
 print(f'% de aprobados: {porcentaje_aprobados} %')
 
+# 'f' viene de Format, y lo utilizas acompañado de llaves {} para indicar
+# que dentro de esas llaves estás incrustando una variable dentro del string.
+
 
 #_________________________________________________________________________
 #_________________________________________________________________________
