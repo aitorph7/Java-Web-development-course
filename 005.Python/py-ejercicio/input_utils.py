@@ -13,9 +13,9 @@ def read_int(prompt):
 
 
 
-edad = read_int('Introduce tu edad :')
-peso = read_int('Introduce tu peso: ')
-altura = read_int('Introduce tu altura: ')
+# edad = read_int('Introduce tu edad :')
+# peso = read_int('Introduce tu peso: ')
+# altura = read_int('Introduce tu altura: ')
 
 
 
@@ -30,15 +30,32 @@ def read_float(prompt):
             print('No introdujo su peso de forma correcta')
 
 
-peso_exacto = read_float('Introduce tu peso exacto: ')
+# peso_exacto = read_float('Introduce tu peso exacto: ')
 
 
 # La siguiente función lee por consola un valor y devuelve True or False:
 
-def read_boolean(prompt):
-    respuesta = input(prompt)
-    booleano = respuesta.lower() in ['si', 'yes', 'sí', 'oui', 'ja', 'bai']
-    return booleano
+    #def read_boolean(prompt):
+    #    respuesta = input(prompt)
+    #    booleano = respuesta.lower() in ['si', 'yes', 'sí', 'oui', 'ja', 'bai']
+    #    return booleano
 
-atencion_pregunta = read_boolean('¿Era blanco el caballo blanco de Santiago?: ')
-print(f'atención_pregunta {atencion_pregunta}')
+#atencion_pregunta = read_boolean('¿Era blanco el caballo blanco de Santiago?: ')
+#print(f'atención_pregunta {atencion_pregunta}')
+
+
+# Otra manera de hacerlo:
+def read_bool(prompt):
+    while True:
+        try:
+            resultado = input(prompt).lower()
+            if resultado == 'si':
+                return True
+            elif resultado == 'no':
+                return False
+            else:
+                print('valor incorrecto')
+                # no te saca del bucle, reppite otra iteración hasta que
+                # escriba
+        except Exception:
+            print('No se ha podido leer el boolean')
