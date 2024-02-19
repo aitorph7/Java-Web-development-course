@@ -1,0 +1,9 @@
+<h1>Listado de productos</h1>
+
+<ul>
+  @for (name of names; track name) {
+    <li>{{name}}</li> <!-- Itera sobre el array creado en el archivo
+      TypeScript y lo muestra en la web como una lista desordenada;
+      esto solo funciona para Angular 17, en la v16 se hace de otra forma.-->
+  }
+</ul>
