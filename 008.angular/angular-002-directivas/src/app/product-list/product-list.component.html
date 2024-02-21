@@ -7,3 +7,25 @@
       esto solo funciona para Angular 17, en la v16 se hace de otra forma.-->
   }
 </ul>
+
+<ol> <!-- Bucle For de la v17-->
+  @for (product of products; track product.id) {
+    <li>{{product.title}} con precio {{product.price}} €
+       y disponibilidad {{product.available}}
+    </li>
+  }
+</ol>
+
+<ol>
+  @for (email of emails; track email) {
+    <li>{{email}}</li>
+  } @empty {
+    <li>Ni se ha encontrado ningún resultado.</li>
+  }
+</ol>
+
+<ol> <!-- forma de declarar un bucle For válido para la v16-->
+  <li *ngFor="let product of products">
+    {{product.title}}
+  </li>
+</ol>
