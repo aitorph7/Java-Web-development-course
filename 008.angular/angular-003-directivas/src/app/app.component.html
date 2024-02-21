@@ -1,0 +1,50 @@
+<h1>{{title}}</h1>
+
+<ul>
+  @for (nombre of nombres; track nombre) {
+  <li>{{nombre}}</li>
+  }
+</ul>
+<ul>
+  @for (product of products; track product.id) {
+  <li>{{product.title}} cuesta {{product.price}}€ fabricado por {{product.manufacturer.name}}</li>
+  }
+</ul>
+<ul>
+  @for (manufacturer of manufacturers; track manufacturer.id) {
+    <li>{{manufacturer.name}}</li>
+  } @empty {
+    <li>No se han encontrado resultados.</li>
+  }
+</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Available</th>
+      <th scope="col">Price (€)</th>
+      <th scope="col">Publish Date</th>
+      <th scope="col">Manufacturer</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (product of products; track product.id) {
+      <tr>
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.title}}</td>
+        <td>{{product.available}}</td>
+        <td>
+          @if (product.available) {
+            <span class="badge text-bg-success">Sí</span>
+          } @else {
+            <span class="badge text-bg-danger">No</span>
+          }
+        </td>
+        <td>{{product.price}}</td>
+        <td>{{product.publishDate | date:"dd/MM/yyyy"}}</td>
+        <td>{{product.manufacturer.name}}</td>
+      </tr>
+    }
+  </tbody>
+</table>
