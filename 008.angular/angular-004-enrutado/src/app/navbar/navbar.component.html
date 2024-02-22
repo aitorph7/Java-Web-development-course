@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md navbar-light bg-body-tertiary">
+	<div class="container-fluid">
+		<!--<span class="navbar-brand">Dropdowns in navbar</span>-->
+    <a routerLink="/home"> <!-- me ahorro el 'href'-->
+      <img src="/assets/img/cloud-acceleration-svgrepo-com.svg" alt="logo" style="max-width:70px;">
+    </a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			aria-controls="navbarContent"
+			[attr.aria-expanded]="!collapsed"
+			aria-label="Toggle navigation"
+			(click)="collapsed = !collapsed"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item" ngbDropdown>
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button"> <i class="bi bi-rocket-takeoff-fill"></i> Spaceships </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+						<a ngbDropdownItem routerLink="/products" (click)="$event.preventDefault()"><i class="bi bi-card-checklist me-1"></i> Listado de spaceships</a>
+						<a ngbDropdownItem routerLink="/products/create" (click)="$event.preventDefault()"><i class="bi bi-gear-wide-connected me-1"></i> Crear spaceship</a>
+					</div>
+				</li>
+
+				<li class="nav-item" ngbDropdown>
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button"><i class="bi bi-stars"></i> Shipyards </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-end">
+						<a ngbDropdownItem routerLink="/manufacturers" (click)="$event.preventDefault()"><i class="bi bi-tools me-1"></i> Shipyard list</a>
+						<a ngbDropdownItem routerLink="/manufacturers/create" (click)="$event.preventDefault()"><i class="bi bi-hammer me-1"></i> Your shipyard</a>
+					</div>
+				</li>
+
+				<li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> Enroll </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Your career</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Contact us!</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Something else here</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
