@@ -1,0 +1,91 @@
+<p>product-detail works!</p>
+<h3> Spaceship detail is ready to Take Off!</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @if(product){
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <!--Icon grid-->
+                            <div class="container px-4 py-5" id="icon-grid">
+                                <h2 class="pb-2 border-bottom">Spaceship {{product.id}}</h2>
+                            
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+                                  <div class="col d-flex align-items-start">
+                                    <i class="bi bi-rocket flex-shrink-0 me-3 fs-3"></i>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Name</h3>
+                                      <p>{{product.name}}</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#speedometer2"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#geo-fill"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                  <div class="col d-flex align-items-start">
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"></use></svg>
+                                    <div>
+                                      <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+                                      <p>Paragraph of text beneath the heading to explain the heading.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                
+            } @else {
+                <ngb-alert [dismissible]="false">
+                    <strong>Warning!</strong> Spaceship not found!
+                </ngb-alert>
+            }
+        </div>
+       
+    </div>
+    
+</div>

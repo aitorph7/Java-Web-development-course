@@ -3,6 +3,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 // rutas mapeadas contra componentes:
 export const routes: Routes = [
@@ -22,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'products/:id/detail',
+    component: ProductDetailComponent
   },
   // Dejar el siguiente enrutado al final del código:
   {
