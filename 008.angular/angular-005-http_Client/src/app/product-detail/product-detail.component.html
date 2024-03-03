@@ -1,1 +1,7 @@
-<p>product-detail works!</p>
+
+<!-- escribo un If que evalúe si se ha cargado ya el producto, y si lo
+ha hecho, que se muestre por pantalla -->
+@if (product) {
+  <p>{{product.title}}</p>
+  <P>{{product.price}}</P>
+}

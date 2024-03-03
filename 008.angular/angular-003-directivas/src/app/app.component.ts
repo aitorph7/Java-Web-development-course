@@ -18,7 +18,7 @@ export class AppComponent {
 
   nombres: string[] = ['Noemi', 'Aitor', 'Judith'];
 
-  products: Product[] = [
+  products: Product[] = [ // Creo productos a mano.
     {
       id: 1,
       title: 'producto 1',

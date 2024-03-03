@@ -2,6 +2,11 @@
 
 <ul>
   @for (product of products; track product.id) {
-    <li>{{product.title}}</li>
+    <li> <!-- quiero que cuando clique el enlace en la pantalla listado, navegue a
+      otra pantalla de detalle del producto:
+      http://localhost:4200/products/3/detail 
+    que de momento no hace nada porque hay que programar el enrutado-->
+      <a [routerLink]="['/products', product.id, 'detail']">{{product.title}}</a>
+    </li>
   }
 </ul>
