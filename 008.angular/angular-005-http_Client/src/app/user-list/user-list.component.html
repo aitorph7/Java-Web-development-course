@@ -1,0 +1,8 @@
+
+<ul>
+  @for (currentUser of users; track currentUser.id) {
+    <li>
+      <a [routerLink]="['/usuarios', currentUser.id, 'detalle']">{{currentUser.email}}</a>
+    </li>
+  }
+</ul>
