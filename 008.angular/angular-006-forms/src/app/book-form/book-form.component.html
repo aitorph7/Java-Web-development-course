@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="bookForm" (ngSubmit)="save()">
+    
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="title" 
+                    placeholder="Angular avanzado" formControlName="title">
+                    <label for="title">Título del libro</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="price" 
+                    formControlName="price" step="0.01">
+                    <label for="price">Precio en euros (€)</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="available" formControlName="available">
+                    <label class="form-check-label" for="available" style="cursor:pointer">
+                      Disponible para su venta (sí o no)
+                    </label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="datetime-local" class="form-control" id="publishDate" 
+                    formControlName="publishDate">
+                    <label for="publishDate">Fecha de publicación del libro</label>
+                </div>
+
+                <!-- Selector simple -->
+                <select class="form-select form-select-lg mb-3" formControlName="category">
+                    <option selected>Open this select menu</option>
+                    <option value="category1">category1</option>
+                    <option value="category2">category2</option>
+                    <option value="category3">category3</option>
+                </select>
+
+                <!-- selector múltimple -->
+                <select class="form-select form-select-lg mb-3" formControlName="topics" multiple>
+                    <option selected>Open this select menu</option>
+                    <option value="topic1">topìc1</option>
+                    <option value="topic2">topic2</option>
+                    <option value="topic3">topic3</option>
+                </select>
+            
+                  <button class="btn btn-success" type="submit">Enviar</button>
+            
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
