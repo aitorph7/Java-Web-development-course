@@ -2,8 +2,12 @@
 @for (album of albums; track album.id) {
   <p> <!-- haré que el album.id sea clicable insertando routerLink + una ruta en forma de String que apunte
   a:  albums/:id/detail  ...y que me lleve a la pantalla detalle de un disco.
-  El enrutado lo debo crear en el archivo 'app.routes.ts' -->
-    <a [routerLink]="['/albums', album.id, 'detail']">{{album.id}}</a> {{album.catalogNumber}} {{album.price}}
+  El enrutado lo debo crear en el archivo 'app.routes.ts'
+    <a [routerLink]="['/albums', album.id, 'detail']">{{album.id}}</a> {{album.catalogNumber}} {{album.price}}-->
+    {{album.id}} {{album.catalogNumber}} {{album.price}}
+    <button class="btn btn-info" [routerLink]="['/albums', album.id, 'detail']">View album</button>
+    <button class="btn btn-success" [routerLink]="['/albums', album.id, 'update']">Update album</button>
+    <button class="btn btn-danger">Delete album</button>
   </p>
 } @empty {
   <p>Oh Gosh! ain't no albums.</p>
