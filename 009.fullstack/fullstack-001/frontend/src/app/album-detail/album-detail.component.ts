@@ -39,7 +39,7 @@ export class AlbumDetailComponent implements OnInit{
       - Podría traer todos los géneros de un album... /genres/filter-by-album/id
 
       - Suponiendo que la conexión fuera LAZY y no lo trajese de manera automática, podría
-        traer al autor de un album... /author/filter-by-album/id
+        traer al artista de un album... /artist/filter-by-album/id
       */
     });
   }

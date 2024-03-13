@@ -9,6 +9,10 @@ export const routes: Routes = [
     component: AlbumListComponent
   },
   {
+    path: 'albums',
+    component: AlbumListComponent
+  },
+  {
     path: 'albums/:id/detail',
     component: AlbumDetailComponent
   },

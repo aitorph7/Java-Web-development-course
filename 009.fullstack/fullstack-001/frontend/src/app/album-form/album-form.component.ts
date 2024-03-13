@@ -25,18 +25,18 @@ export class AlbumFormComponent implements OnInit{
     private router: Router,
     private activatedRoute: ActivatedRoute){}
 
-    ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: { [x: string]: any; }) => {
       const id = params['id'];
       if (!id) return;
 
       this.httpClient.get<Album>('http://localhost:8080/albums/' + id)
-      .subscribe(albumFromBackend => {
+      .subscribe((albumFromBackend: { id: any; catalogNumber: any; price: any; }) => {
         // cargar el album obtenido en el formulario albumForm
         this.albumForm.reset({
-         id: albumFromBackend.id,
-         catalogNumber: albumFromBackend.catalogNumber,
-         price: albumFromBackend.price 
+          id: albumFromBackend.id,
+          catalogNumber: albumFromBackend.catalogNumber,
+          price: albumFromBackend.price 
         });
 
       });
@@ -55,33 +55,42 @@ export class AlbumFormComponent implements OnInit{
 
     // OPCIÓN 2: equivalente a la anterior pero en una sola línea de código: (+ rapidez)
     const album2: Album = this.albumForm.value as Album;
-    console.log(album2);
+    // console.log(album2);
 
     const url = "http://localhost:8080/albums";
 
     // OPCIÓN 01.
+    /*
     this.httpClient.post<Album>(url, album).subscribe(albumFromBackend => {
       console.log(albumFromBackend);
-      // Elige uno de los siguientes métodos de navegación:
-      // 01. Navegar hacia el listado:
-      // this.router.navigate(['/albums']);
+      Elige uno de los siguientes métodos de navegación:
+        01. Navegar hacia el listado:
+      this.router.navigate(['/albums']);
 
-      // 02. Navegar hacia detail:
+        02. Navegar hacia detail:
       this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
     }, error => {
       console.log(error),
-      window.alert("Invalid data")
-    });
-
-    /* OPCIÓN 02. Para resolver el tachado de 'subscribe' (deprecado)
-
-    this.httpClient.post<Album>(url, album).subscribe({
-      // si todo va bien se ejecuta next:
-      next: (albumFromBackend) => this.router.navigate(['/albums', albumFromBackend.id, 'detail']),
-      // si todo va mal se ejecuta error:
-      error: (error) => window.alert("Invalid Data"),
+      window.alert("Invalid data");
     });
     */
+
+    // OPCIÓN 02. Para resolver el tachado de 'subscribe' (deprecado)
+    this.httpClient.post<Album>(url, album).subscribe({
+      next: (albumFromBackend: { id: any; }) => this.router.navigate(['/albums', albumFromBackend.id, 'detail']),
+      error: (error: any) => window.alert("Invalid Data"),
+    });
+
+      /*
+      A continuación el método de arriba como PLANTILLA:
+
+      this.httpClient.post<Album>(url, album).subscribe({
+        // si todo va bien se ejecuta next
+        next: () => {},
+        // si todo va mal se ejecuta error
+        error: () => {},
+      });
+      */
     
 
   }
