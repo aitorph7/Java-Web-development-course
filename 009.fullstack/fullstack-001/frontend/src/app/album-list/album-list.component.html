@@ -1,10 +1,12 @@
 
+<h1 class="mt-5 mb-5">Album List</h1>
+
 @for (album of albums; track album.id) {
   <p> 
     {{album.id}} {{album.catalogNumber}} {{album.price}}
     <button class="btn btn-info" [routerLink]="['/albums', album.id, 'detail']">View album</button>
     <button class="btn btn-success" [routerLink]="['/albums', album.id, 'update']">Update album</button>
-    <button class="btn btn-danger">Delete album</button>
+    <button class="btn btn-danger" (click)="delete(album)">Delete album</button>
   </p>
   <!-- haré que el album.id sea clicable insertando routerLink + una ruta en forma de String que apunte
   a...  albums/:id/detail  ...y que me lleve a la pantalla detalle de un disco.

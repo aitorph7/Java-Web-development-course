@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Album } from '../model/album.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Artist } from '../model/artist.model';
 
 @Component({
   selector: 'app-album-form',
@@ -16,13 +17,21 @@ export class AlbumFormComponent implements OnInit{
   albumForm = this.fb.group({
     id: [0],
     catalogNumber: [''],
-    price: [0.0]
-  })
+    price: [0.0],
+    artist: this.fb.group({
+      id: [0],
+      name: [''],
+      country: [''],
+      active: [false]
+    })
+  });
 
   isUpdate: boolean = false; /* por defecto estoy en CREAR, no en ACTUALIZAR.
   Este boolean sirve para diferenciar si usar el método post, put... y para poder
   mostrar un título u otro en la pantalla.
   */
+  artists: Artist[] = []; // array de artistas para asociar un artista al album.
+
   constructor(
     private fb: FormBuilder,
     private httpClient: HttpClient,
@@ -30,6 +39,10 @@ export class AlbumFormComponent implements OnInit{
     private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
+    // cargar artistas de backend para el selector de artistas en el formulario
+    this.httpClient.get<Artist[]>('http://localhost:8080/artists')
+    .subscribe((artists: any) => this.artists = artists);
+
     this.activatedRoute.params.subscribe((params: { [x: string]: any; }) => {
       const id = params['id'];
       if (!id) return;
@@ -57,7 +70,7 @@ export class AlbumFormComponent implements OnInit{
         this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
       });
     } else { // establezco la url de create:
-      const url = 'http://localhost:8080/albums/';
+      const url = 'http://localhost:8080/albums';
       this.httpClient.post<Album>(url, album).subscribe((albumFromBackend: { id: any; }) => {
         this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
       });

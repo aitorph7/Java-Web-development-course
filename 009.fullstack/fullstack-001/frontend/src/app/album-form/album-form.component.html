@@ -25,6 +25,16 @@
                     <label for="price">Album price in dollars ($)</label>
                 </div>
 
+                <div class="form-floating">
+                    <select class="form-select" id="artist" formControlName="artist">
+                        <option selected>Open this select menu</option>
+                        @for (artist of artists; track artist.id) {
+                            <option>{{artist.name}}</option>
+                        }
+                    </select>
+                    <label for="artist">Album artist</label>
+                </div>
+
                 @if (isUpdate) {
                     <button class="btn btn-success" type="submit">Update</button>
                 } @else {
