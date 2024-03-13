@@ -5,12 +5,10 @@ import com.certidevs.repository.AlbumRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @CrossOrigin("*") //Para permitir acceso desde cualquier dominio desde el exterior.
@@ -35,7 +33,21 @@ public class AlbumController {
             return ResponseEntity.notFound().build();
     }
 //    @GetMapping("albums/{id}")
-//    public Album finsById(@PathVariable Long id){
+//    public Album findById(@PathVariable Long id){
 //        return this.albumRepository.findById(id).orElseThrow();
 //    }
+    @PostMapping("albums")
+    public Album create(@RequestBody() Album album){
+        return this.albumRepository.save(album);
+    }
+    @PutMapping("albums/{id}")
+    public Album update(@PathVariable Long id, @RequestBody Album album){
+        if (this.albumRepository.existsById(id))
+            return this.albumRepository.save(album);
+        throw new NoSuchElementException();
+    }
+    @DeleteMapping("albums/{id}")
+    public void deleteById(@PathVariable Long id){
+        this.albumRepository.deleteById(id);
+    }
 }
