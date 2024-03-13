@@ -1,4 +1,5 @@
 {
   "workbench.tree.expandMode": "doubleClick",
-  "explorer.compactFolders": false
+  "explorer.compactFolders": false,
+  "editor.folding": true
 }

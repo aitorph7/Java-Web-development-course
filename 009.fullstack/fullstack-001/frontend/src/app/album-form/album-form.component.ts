@@ -19,6 +19,10 @@ export class AlbumFormComponent implements OnInit{
     price: [0.0]
   })
 
+  isUpdate: boolean = false; /* por defecto estoy en CREAR, no en ACTUALIZAR.
+  Este boolean sirve para diferenciar si usar el método post, put... y para poder
+  mostrar un título u otro en la pantalla.
+  */
   constructor(
     private fb: FormBuilder,
     private httpClient: HttpClient,
@@ -38,60 +42,25 @@ export class AlbumFormComponent implements OnInit{
           catalogNumber: albumFromBackend.catalogNumber,
           price: albumFromBackend.price 
         });
+        // marcar boolean isUpdate true
+        this.isUpdate = true;
 
       });
     });
   }
 
   save(){
-
-    // OPCIÓN 1: extraer los valores del formulario manualmente uno a uno: (+ control)
-    const album: Album = {
-      id: this.albumForm.get('id')?.value ?? 0,
-      catalogNumber: this.albumForm.get('catalogNumber')?.value ?? '',
-      price: this.albumForm.get('price')?.value ?? 0.0
-    }
-    console.log(album);
-
-    // OPCIÓN 2: equivalente a la anterior pero en una sola línea de código: (+ rapidez)
-    const album2: Album = this.albumForm.value as Album;
-    // console.log(album2);
-
-    const url = "http://localhost:8080/albums";
-
-    // OPCIÓN 01.
-    /*
-    this.httpClient.post<Album>(url, album).subscribe(albumFromBackend => {
-      console.log(albumFromBackend);
-      Elige uno de los siguientes métodos de navegación:
-        01. Navegar hacia el listado:
-      this.router.navigate(['/albums']);
-
-        02. Navegar hacia detail:
-      this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
-    }, error => {
-      console.log(error),
-      window.alert("Invalid data");
-    });
-    */
-
-    // OPCIÓN 02. Para resolver el tachado de 'subscribe' (deprecado)
-    this.httpClient.post<Album>(url, album).subscribe({
-      next: (albumFromBackend: { id: any; }) => this.router.navigate(['/albums', albumFromBackend.id, 'detail']),
-      error: (error: any) => window.alert("Invalid Data"),
-    });
-
-      /*
-      A continuación el método de arriba como PLANTILLA:
-
-      this.httpClient.post<Album>(url, album).subscribe({
-        // si todo va bien se ejecuta next
-        next: () => {},
-        // si todo va mal se ejecuta error
-        error: () => {},
+    const album: Album = this.albumForm.value as Album;
+    if (this.isUpdate) { //establezco la url de update:
+      const url = 'http://localhost:8080/albums/' + album.id;
+      this.httpClient.put<Album>(url, album).subscribe((albumFromBackend: { id: any; }) => {
+        this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
       });
-      */
-    
-
+    } else { // establezco la url de create:
+      const url = 'http://localhost:8080/albums/';
+      this.httpClient.post<Album>(url, album).subscribe((albumFromBackend: { id: any; }) => {
+        this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
+      });
+    }
   }
 }

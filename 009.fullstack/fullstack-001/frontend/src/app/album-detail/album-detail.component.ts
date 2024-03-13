@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Album } from '../model/album.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-album-detail',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, RouterLink],
   templateUrl: './album-detail.component.html',
   styleUrl: './album-detail.component.css'
 })

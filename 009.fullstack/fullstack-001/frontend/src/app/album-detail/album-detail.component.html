@@ -1,4 +1,9 @@
 
+
+<h1 class="mt-5 mb-5">Album detail screen</h1>
+
 @if (album) {
   <p>{{album.id}} {{album.catalogNumber}}</p>
+
+  <button class="btn btn-success" [routerLink]="['/albums', album.id, 'update']">Update album</button>
 }
