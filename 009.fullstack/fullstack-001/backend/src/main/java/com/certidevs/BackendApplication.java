@@ -23,6 +23,7 @@ public class BackendApplication {
 		 */
 		AlbumRepository albumRepository = context.getBean(AlbumRepository.class);
 		ArtistRepository artistRepository = context.getBean(ArtistRepository.class);
+		RecordCompanyRepository recordCompanyRepository = context.getBean(RecordCompanyRepository.class);
 
 		albumRepository.deleteAll();
 		artistRepository.deleteAll();
