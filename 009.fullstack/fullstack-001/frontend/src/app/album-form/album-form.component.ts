@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Album } from '../model/album.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Artist } from '../model/artist.model';
@@ -14,6 +14,7 @@ import { Artist } from '../model/artist.model';
 })
 export class AlbumFormComponent implements OnInit{
 
+  /*
   albumForm = this.fb.group({
     id: [0],
     catalogNumber: [''],
@@ -24,6 +25,15 @@ export class AlbumFormComponent implements OnInit{
       country: [''],
       active: [false]
     })
+  });
+  */
+
+  // Si hay asociaciones entre clases es mejor utilizar FormControl:
+  albumForm = new FormGroup({
+    id: new FormControl<number>(0),
+    catalogNumber: new FormControl<string>(''),
+    price: new FormControl<number>(0.0),
+    artist: new FormControl()
   });
 
   isUpdate: boolean = false; /* por defecto estoy en CREAR, no en ACTUALIZAR.
@@ -48,12 +58,13 @@ export class AlbumFormComponent implements OnInit{
       if (!id) return;
 
       this.httpClient.get<Album>('http://localhost:8080/albums/' + id)
-      .subscribe((albumFromBackend: { id: any; catalogNumber: any; price: any; }) => {
+      .subscribe((albumFromBackend: { id: any; catalogNumber: any; price: any; artist: any; }) => {
         // cargar el album obtenido en el formulario albumForm
         this.albumForm.reset({
           id: albumFromBackend.id,
           catalogNumber: albumFromBackend.catalogNumber,
-          price: albumFromBackend.price 
+          price: albumFromBackend.price,
+          artist: albumFromBackend.artist
         });
         // marcar boolean isUpdate true
         this.isUpdate = true;
@@ -75,5 +86,14 @@ export class AlbumFormComponent implements OnInit{
         this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
       });
     }
+  }
+  /* Gracias al siguiente método, cuando haga clic en un album,  el artista aparecerá
+  en el selector ya precargado:
+  */
+  compareObjects(o1: any, o2: any): boolean{
+    if(o1 && o2) {
+      return o1.id === o2.id;
+    }
+    return o1 === o2;
   }
 }

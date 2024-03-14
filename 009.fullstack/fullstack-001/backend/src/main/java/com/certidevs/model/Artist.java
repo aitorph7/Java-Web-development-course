@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,4 +24,5 @@ public class Artist {
     private String name;
     private String country;
     private Boolean active;
+    private LocalDate estYear;
 }

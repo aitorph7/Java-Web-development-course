@@ -26,10 +26,11 @@
                 </div>
 
                 <div class="form-floating">
-                    <select class="form-select" id="artist" formControlName="artist">
+                    <select class="form-select" id="artist" formControlName="artist" [compareWith]="compareObjects">
                         <option selected>Open this select menu</option>
+                        <!-- iterar sobre el array de artists mostrando cada uno. -->
                         @for (artist of artists; track artist.id) {
-                            <option>{{artist.name}}</option>
+                            <option [ngValue]="artist">{{artist.name}}</option>
                         }
                     </select>
                     <label for="artist">Album artist</label>
