@@ -3,11 +3,14 @@ import { Album } from '../model/album.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-album-list',
   standalone: true,
-  imports: [HttpClientModule, RouterLink], /*'RouterLink' permite navegar en este listado de albumes;
+  imports: [HttpClientModule, RouterLink, NgbAlertModule, DatePipe],
+  /*
+  'RouterLink' permite navegar en este listado de albumes;
   lo siguiente es meter un enlace en el HTML de este listado de albumes.
   */
   templateUrl: './album-list.component.html',

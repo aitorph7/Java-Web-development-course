@@ -1,6 +1,6 @@
 export interface Artist{
   id: number;
-  name: String;
-  country: String;
-  active: Boolean;
+  name: string;
+  country: string;
+  active: boolean;
 }

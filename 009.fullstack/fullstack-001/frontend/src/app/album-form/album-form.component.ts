@@ -75,6 +75,8 @@ export class AlbumFormComponent implements OnInit{
 
   save(){
     const album: Album = this.albumForm.value as Album;
+    console.log(album); // para visualizar cómo el objeto album se envía al backend.
+
     if (this.isUpdate) { //establezco la url de update:
       const url = 'http://localhost:8080/albums/' + album.id;
       this.httpClient.put<Album>(url, album).subscribe((albumFromBackend: { id: any; }) => {
@@ -88,7 +90,8 @@ export class AlbumFormComponent implements OnInit{
     }
   }
   /* Gracias al siguiente método, cuando haga clic en un album,  el artista aparecerá
-  en el selector ya precargado:
+  en el selector ya precargado; compara los autores por id y así puede saber cual tiene
+  que cargar:
   */
   compareObjects(o1: any, o2: any): boolean{
     if(o1 && o2) {
