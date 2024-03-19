@@ -1,28 +1,26 @@
 package com.certidevs.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
-@Entity
+@Entity(name = "a_user")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Artist {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String country;
-    private Boolean active;
-    private LocalDate estYear;
-    private String photoUrl;
-    @Column(length = 1000) // ampliar la longitud de 255 a 1000
-    private String bio;
+    private String email;
+    private String password;
+
 }

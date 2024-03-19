@@ -31,18 +31,22 @@ public class BackendApplication {
 		ArtistRepository artistRepository = context.getBean(ArtistRepository.class);
 		RecordCompanyRepository recordCompanyRepository = context.getBean(RecordCompanyRepository.class);
 
-		recordCompanyRepository.deleteAll(); // Borro los datos que haya para que se generen nuevos datos.
+		/*
+		1º borro los libros porque tienen asociaciones hacia artistas y discográficas.
+		Si borro 1º un artista o disquera dará error al haber álbumes apuntando a ellos.
+		*/
 		albumRepository.deleteAll();
+		recordCompanyRepository.deleteAll(); // Borro los datos que haya para que se generen nuevos datos.
 		artistRepository.deleteAll();
 
-		Artist artist1 = new Artist(null, "Mike Oldfield", "England", false, LocalDate.of(1967, 1, 1));
-		Artist artist2 = new Artist(null, "Simple Minds", "Scotland", true, LocalDate.of(1977, 1,1));
-		Artist artist3 = new Artist(null, "Roy Orbison", "USA", false, LocalDate.of(1953, 1, 1));
-		Artist artist4 = new Artist(null, "Alice in Chains", "USA", true, LocalDate.of(1987, 1, 1));
-		Artist artist5 = new Artist(null, "Depeche Mode", "England", true, LocalDate.of(1980, 1, 1));
-		Artist artist6 = new Artist(null, "Manowar", "USA", true, LocalDate.of(1980, 1, 1));
-		Artist artist7 = new Artist(null, "Metallica", "USA", true, LocalDate.of(1981, 1, 1));
-		Artist artist8 = new Artist(null, "Queen", "England", true, LocalDate.of(1970, 1, 1));
+		Artist artist1 = new Artist(null, "Mike Oldfield", "England", false, LocalDate.of(1967, 1, 1), "http://placehold.co/400", "Texto largo de leer");
+		Artist artist2 = new Artist(null, "Simple Minds", "Scotland", true, LocalDate.of(1977, 1,1),"http://placehold.co/400", "Texto largo de leer");
+		Artist artist3 = new Artist(null, "Roy Orbison", "USA", false, LocalDate.of(1953, 1, 1),"http://placehold.co/400", "Texto largo de leer");
+		Artist artist4 = new Artist(null, "Alice in Chains", "USA", true, LocalDate.of(1987, 1, 1),"http://placehold.co/400", "Texto largo de leer");
+		Artist artist5 = new Artist(null, "Depeche Mode", "England", true, LocalDate.of(1980, 1, 1),"http://placehold.co/400", "Texto largo de leer");
+		Artist artist6 = new Artist(null, "Manowar", "USA", true, LocalDate.of(1980, 1, 1),"http://placehold.co/400", "Texto largo de leer");
+		Artist artist7 = new Artist(null, "Metallica", "USA", true, LocalDate.of(1981, 1, 1),"http://placehold.co/400", "Texto largo de leer");
+		Artist artist8 = new Artist(null, "Queen", "England", true, LocalDate.of(1970, 1, 1),"http://placehold.co/400", "Texto largo de leer");
 		artistRepository.saveAll(List.of(artist1, artist2, artist3, artist4, artist5, artist6, artist7, artist8));
 
 		RecordCompany company1 = new RecordCompany(null, "Virgin Records", "https://www.efeeme.com/wp-content/uploads/virgin-23-0-13.jpg", 1972, "long description");

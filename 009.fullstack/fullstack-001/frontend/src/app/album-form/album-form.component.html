@@ -15,6 +15,12 @@
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control"
+                    id="title" formControlName="title">
+                    <label for="title">Title</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control"
                     id="catalogNumber" formControlName="catalogNumber">
                     <label for="catalogNumber">Album Catalog Number</label>
                 </div>
@@ -25,7 +31,19 @@
                     <label for="price">Album price in dollars ($)</label>
                 </div>
 
-                <div class="form-floating">
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="published" formControlName="published">
+                    <label class="form-check-label" for="published" style="cursor:pointer;">
+                      Published
+                    </label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="releaseDate" formControlName="releaseDate">
+                    <label for="releaseDate">Release Date</label>
+                </div>
+
+                <div class="form-floating mb-3">
                     <select class="form-select" id="artist" formControlName="artist" [compareWith]="compareObjects">
                         <option selected>Open this select menu</option>
                         <!-- iterar sobre el array de artists mostrando cada uno. -->
@@ -34,6 +52,17 @@
                         }
                     </select>
                     <label for="artist">Album artist</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="recordCompany" formControlName="recordCompany" [compareWith]="compareObjects">
+                        <option selected>Open this select menu</option>
+                        <!-- iterar sobre el array de discográficas mostrando cada una. -->
+                        @for (recordCompany of recordCompanies; track recordCompany.id) {
+                            <option [ngValue]="recordCompany">{{recordCompany.name}}</option>
+                        }
+                    </select>
+                    <label for="recordCompany">Record Company</label>
                 </div>
 
                 @if (isUpdate) {

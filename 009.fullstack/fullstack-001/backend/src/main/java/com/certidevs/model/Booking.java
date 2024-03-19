@@ -13,16 +13,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Artist {
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String country;
-    private Boolean active;
-    private LocalDate estYear;
-    private String photoUrl;
-    @Column(length = 1000) // ampliar la longitud de 255 a 1000
-    private String bio;
+    private LocalDate startDate;
+    private LocalDate finishDate;
+    private Double price;
+    @ManyToOne
+    private Album album;
+    @ManyToOne
+    private User user;
 }

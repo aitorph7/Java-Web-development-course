@@ -1,28 +1,23 @@
 
-<h1 class="mt-5 mb-5">Album List</h1>
+@if (artist) {
+  <div class="px-4 py-5 mt-5 text-center">
+    <img class="d-block mx-auto mb-4 rounded-circle" [src]="artist.photoUrl" alt="" style="max-width: 150px;">
+    <h1 class="display-5 fw-bold text-body-emphasis">{{artist.name}}</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">{{artist.bio}}</p>
+      <div class="d-grid gap-2 d-sm-flex justify-comtent-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Delete</button>
+      </div>
+    </div>
+  </div>
+}
 
-<!-- @if (showDeletedAlbumMessage) {
-  <ngb-alert type="success" [dismissible]= "false">Album successfully deleted</ngb-alert>
-  <ngb-alert type="success" (closed)="hideDeletedAlbumMessage()">Album successfully deleted</ngb-alert>
-} -->
 
-<!--@for (album of albums; track album.id) {
-  <p> 
-    {{album.id}} {{album.catalogNumber}} {{album.price}}
-    <button class="btn btn-info" [routerLink]="['/albums', album.id, 'detail']">View album</button>
-    <button class="btn btn-success ms-2" [routerLink]="['/albums', album.id, 'update']">Update album</button>
-    <button class="btn btn-danger ms-2" (click)="delete(album)">Delete album</button>
-  </p>
-  Haré que el album.id sea clicable insertando routerLink + una ruta en forma de String que apunte
-  a...  albums/:id/detail  ...y que me lleve a la pantalla detalle de un disco.
-  El enrutado lo debo crear en el archivo 'app.routes.ts'
-    <a [routerLink]="['/albums', album.id, 'detail']">{{album.id}}</a> {{album.catalogNumber}} {{album.price}}
-} @empty {
-  <p>Oh Gosh! ain't no albums.</p>
-} -->
 <div class="container">
   <div class="row">
     <div class="col">
+      <h2 class="mb-5">Artist Albums</h2>
       <table class="table">
         <thead>
           <tr>
@@ -32,8 +27,8 @@
             <th scope="col">Price ($)</th>
             <th scope="col">Published</th>
             <th scope="col">Release Date</th>
-            <th scope="col">Artist</th>
             <th scope="col">Record Company</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -63,10 +58,10 @@
               </td>
               <td>
                 <button class="btn btn-info" [routerLink]="['/albums', album.id, 'detail']">View album</button>
-                <button class="btn btn-success ms-2" [routerLink]="['/albums', album.id, 'update']">Update album</button>
-                <button class="btn btn-danger ms-2" (click)="delete(album)">Delete album</button>
               </td>
             </tr>
+          } @empty {
+            <h5>Ain't no albums.</h5>
           }
         </tbody>
       </table>

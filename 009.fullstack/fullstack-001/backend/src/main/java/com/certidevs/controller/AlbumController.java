@@ -36,6 +36,13 @@ public class AlbumController {
 //    public Album findById(@PathVariable Long id){
 //        return this.albumRepository.findById(id).orElseThrow();
 //    }
+
+    // obtener álbumes filtrando por artista:
+    @GetMapping("artists/filter-by-artist/{id}")
+    public List<Album> findAllByArtistId (@PathVariable Long id){
+        return this.albumRepository.findAllByArtist_Id(id);
+    }
+
     @PostMapping("albums")
     public Album create(@RequestBody() Album album){
         return this.albumRepository.save(album);
@@ -48,6 +55,12 @@ public class AlbumController {
     }
     @DeleteMapping("albums/{id}")
     public void deleteById(@PathVariable Long id){
+        // Opción 1: borar el libro, pero antes desasociar o borrar
         this.albumRepository.deleteById(id);
+
+//        opción 2: desactivar/ archivar el album
+//        album = this.albumRepository.findById();
+//        album.setPublisehd(false)
+//        albumRepository.save(album)
     }
 }

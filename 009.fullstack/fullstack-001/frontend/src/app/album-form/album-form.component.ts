@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { Album } from '../model/album.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Artist } from '../model/artist.model';
+import { RecordCompany } from '../model/recordCompany.model';
 
 @Component({
   selector: 'app-album-form',
@@ -31,9 +32,13 @@ export class AlbumFormComponent implements OnInit{
   // Si hay asociaciones entre clases es mejor utilizar FormControl:
   albumForm = new FormGroup({
     id: new FormControl<number>(0),
+    title: new FormControl<string>(''),
     catalogNumber: new FormControl<string>(''),
     price: new FormControl<number>(0.0),
-    artist: new FormControl()
+    published: new FormControl<boolean>(true),
+    releaseDate: new FormControl<Date>(new Date()),
+    artist: new FormControl(),
+    recordCompany: new FormControl()
   });
 
   isUpdate: boolean = false; /* por defecto estoy en CREAR, no en ACTUALIZAR.
@@ -41,6 +46,7 @@ export class AlbumFormComponent implements OnInit{
   mostrar un título u otro en la pantalla.
   */
   artists: Artist[] = []; // array de artistas para asociar un artista al album.
+  recordCompanies: RecordCompany[]=[];
 
   constructor(
     private fb: FormBuilder,
@@ -49,23 +55,33 @@ export class AlbumFormComponent implements OnInit{
     private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
-    // cargar artistas de backend para el selector de artistas en el formulario
+    /* xa cargar en el array los datos de artistas y discográficas del backend para que salgan 
+    en el selector del formulario.
+    */
     this.httpClient.get<Artist[]>('http://localhost:8080/artists')
     .subscribe((artists: any) => this.artists = artists);
 
-    this.activatedRoute.params.subscribe((params: { [x: string]: any; }) => {
+    this.httpClient.get<RecordCompany[]>('http://localhost:800/recordCompanies')
+    .subscribe((recordCompanies: any) => this.recordCompanies = recordCompanies);
+
+    this.activatedRoute.params.subscribe((params: any) => {
       const id = params['id'];
       if (!id) return;
 
       this.httpClient.get<Album>('http://localhost:8080/albums/' + id)
-      .subscribe((albumFromBackend: { id: any; catalogNumber: any; price: any; artist: any; }) => {
+      .subscribe((albumFromBackend: any) => {
         // cargar el album obtenido en el formulario albumForm
         this.albumForm.reset({
           id: albumFromBackend.id,
+          title: albumFromBackend.title,
           catalogNumber: albumFromBackend.catalogNumber,
           price: albumFromBackend.price,
-          artist: albumFromBackend.artist
+          published: albumFromBackend.published,
+          releaseDate: albumFromBackend.releaseDate,
+          artist: albumFromBackend.artist,
+          recordCompany: albumFromBackend.recordCompany
         });
+        
         // marcar boolean isUpdate true
         this.isUpdate = true;
 
@@ -79,12 +95,12 @@ export class AlbumFormComponent implements OnInit{
 
     if (this.isUpdate) { //establezco la url de update:
       const url = 'http://localhost:8080/albums/' + album.id;
-      this.httpClient.put<Album>(url, album).subscribe((albumFromBackend: { id: any; }) => {
+      this.httpClient.put<Album>(url, album).subscribe((albumFromBackend: any) => {
         this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
       });
     } else { // establezco la url de create:
       const url = 'http://localhost:8080/albums';
-      this.httpClient.post<Album>(url, album).subscribe((albumFromBackend: { id: any; }) => {
+      this.httpClient.post<Album>(url, album).subscribe((albumFromBackend: any) => {
         this.router.navigate(['/albums', albumFromBackend.id, 'detail']);
       });
     }
