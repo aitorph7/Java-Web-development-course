@@ -62,9 +62,10 @@
                 </a>
               </td>
               <td>
-                <button class="btn btn-info" [routerLink]="['/albums', album.id, 'detail']">View album</button>
-                <button class="btn btn-success ms-2" [routerLink]="['/albums', album.id, 'update']">Update album</button>
-                <button class="btn btn-danger ms-2" (click)="delete(album)">Delete album</button>
+                <button class="btn btn-info btn-sm" [routerLink]="['/albums', album.id, 'detail']">View</button>
+                <button class="btn btn-success ms-2 btn-sm" [routerLink]="['/albums', album.id, 'update']">Update</button>
+                <button class="btn btn-warning ms-2 btn-sm" [routerLink]="['/albums', album.id, 'reserve']">Book it!</button>
+                <button class="btn btn-danger ms-2 btn-sm" (click)="delete(album)">Delete</button>
               </td>
             </tr>
           }

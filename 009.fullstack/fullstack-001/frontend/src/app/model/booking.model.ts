@@ -6,6 +6,9 @@ export interface Booking {
   startDate: Date;
   finishDate: Date;
   price: number;
+  // shippingPrice
+  // extraPrice
+  // ...
   album: Album;
   user?: User; // opcional
 }
