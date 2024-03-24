@@ -7,13 +7,42 @@
     <div class="form-floating">
       <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
       <label for="email">Email address</label>
+      @if (registerForm.controls.email.touched && registerForm.controls.email.errors) {
+        <div>
+          @if (registerForm.controls.email.errors['required']) {
+            <small class="text-danger">Email required.</small>
+          } 
+          @if (registerForm.controls.email.errors['email']) {
+            <small class="text-danger">Invalid email format.</small>
+          }
+        </div>
+      }
     </div>
+
+    <div class="form-floating">
+      <input type="number" class="form-control" id="phone" placeholder="001234567" formControlName="phone">
+      <label for="phone">Phone number</label>
+      @if (registerForm.controls.phone.touched && registerForm.controls.phone.errors) {
+        <div>
+          @if (registerForm.controls.phone.errors['required']) {
+            <small class="text-danger">Phone number required.</small>
+          }
+          @if (registerForm.controls.phone.errors['pattern']) {
+            <small class="text-danger">Invalid phone number format. 9 digits required.</small>
+          }
+        </div>
+      }
+    </div>
+    
     <div class="form-floating">
       <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
       <label for="password">Password</label>
     </div>
 
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="registerForm.invalid">Register in</button>
+    @if (registerForm.invalid) {
+      <small class="text-danger">Fill out all the fields correctly to continue.</small>
+    }
     <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
   </form>
 </main>

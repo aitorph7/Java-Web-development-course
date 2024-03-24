@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Register } from '../model/register.model';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +16,9 @@ export class RegisterComponent {
   un poco más de trabajo.
   */
   registerForm = new FormGroup({
-    id: new FormControl(''),
-    phone: new FormControl(''),
-    email: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
+    password: new FormControl('')
   });
 
   constructor(private httpClient: HttpClient){}
@@ -26,6 +27,14 @@ export class RegisterComponent {
   */
   
   save(){
-
+    const register: Register = {
+      email: this.registerForm.get('email')?.value ?? '',
+      phone: this.registerForm.get('phone')?.value ?? '',
+      password: this.registerForm.get('password')?.value ?? '',
+    }
+    console.log(register);
+    // Limpiar el formulario (o redirigir al login/home) tras enviar el registro al backend.
+    this.registerForm.reset();
+    
   }
 }
