@@ -33,10 +33,33 @@
         </div>
       }
     </div>
-    
+
     <div class="form-floating">
       <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
       <label for="password">Password</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="passwordConfirm" placeholder="Password" formControlName="passwordConfirm">
+      <label for="passwordConfirm">Repeat your password</label>
+      @if(
+        registerForm.controls.passwordConfirm.touched &&
+          (
+          registerForm.controls.password.errors ||
+          registerForm.controls.passwordConfirm.errors ||
+          registerForm.getError('confirmError')
+          )
+        ) {
+          <small class="text-danger">Matching passwords required. Must be 8-30 characters long.</small>
+      }
+      
+      <!--
+      @if (registerForm.controls.passwordConfirm.touched && registerForm.getError('confirmError')) {
+        <div>
+          <small class="text-danger">Unmatching passwords.</small>
+        </div>
+      }
+      -->
     </div>
 
     <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="registerForm.invalid">Register in</button>
