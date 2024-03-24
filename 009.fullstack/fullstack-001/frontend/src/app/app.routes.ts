@@ -4,11 +4,21 @@ import { AlbumDetailComponent } from './album-detail/album-detail.component';
 import { AlbumFormComponent } from './album-form/album-form.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: AlbumListComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'albums',
