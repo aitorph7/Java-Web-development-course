@@ -22,9 +22,8 @@ export class AlbumListComponent implements OnInit{
   constructor(private httpClient: HttpClient) {};
 
   ngOnInit(): void {
-    this.loadAlbums();/* método implementado haciendo clic dcho. tras
-    seleccionar el contenido del método 'delete' + "Refactor..." +
-    "Extract to method in class album-list.component"
+    this.loadAlbums();/* Trae una lista de usuarios del backend ejecutando 
+    una petición HTTP contra controlador del backend.
     */
   }
   delete(album: Album){

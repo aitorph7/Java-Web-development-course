@@ -26,7 +26,10 @@ export class AlbumDetailComponent implements OnInit{
 
       // Ahora, teniendo en cuenta que quiero traer el disco del backend, llamo al controlador:
       const url = 'http://localhost:8080/albums/' + id;
-      this.httpClient.get<Album>(url).subscribe((alb: Album | undefined) => this.album = alb);
+      this.httpClient.get<Album>(url).subscribe((alb: Album | undefined) => {
+        this.album = alb;
+        console.log(this.album);
+      });
 
       /*
       Para crear una pantalla 'detail' de máximo nivel:
