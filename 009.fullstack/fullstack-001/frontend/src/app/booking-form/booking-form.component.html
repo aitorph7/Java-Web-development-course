@@ -24,7 +24,7 @@
                 <h6 class="my-0">Booked days Total cost</h6>
                 <small class="text-body-secondary">{{numDays}} x {{album?.price}}</small>
               </div>
-              <span class="text-body-secondary">{{bookedDayPrice}}</span>
+              <span class="text-body-secondary">{{bookedDayPrice | currency:'USD':'symbol':'1.2-2'}}</span>
             </li>
           }
           
@@ -57,7 +57,7 @@
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>Total (USD)</span>
-            <strong>{{totalPrice}}</strong>
+            <strong>{{totalPrice | currency:'USD':'symbol':'1.2-2'}}</strong>
           </li>
         </ul>
 
@@ -70,45 +70,54 @@
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Booking details</h4>
-        <form class="needs-validation" novalidate="" [formGroup]="bookingForm" (submit)="save()">
+        @if (showFinishMessage) {
+          <ngb-alert type="success" [dismissible]="false" style="min-height:150px;">
+            Album successfully reserved.
+            <br>
+            Your booking number is {{booking?.id}}
+          </ngb-alert>
+        } @else {
+          <form class="needs-validation" novalidate="" [formGroup]="bookingForm" (submit)="save()">
 
-          <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="startDate"
-            formControlName="startDate" placeholder="yyyy-mm-dd" (change)="calculatePrice()">
-            <label for="startDate">Booking start date</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="finishDate"
-            formControlName="finishDate" placeholder="yyyy-mm-dd" (change)="calculatePrice()">
-            <label for="finishDate">Booking expiration date</label>
-          </div>
-
-          <hr class="my-4">
-
-          <div class="form floating mb-3">
-            <select class="form-select" id="extraItems" formControlName="extraItems" (change)="calculatePrice()">
-              <option value="0">No extra items</option>
-              <option value="10.50">'{{album?.title}}' limited edition (+10.50 $)</option>
-              <option value="19.95">'{{album?.title}}' collectors edition (+19.95 $)</option>
-              <option value="14.99">Artist cool merchandise (+14.99 $)</option>
-            </select>
-            <label for="extraItems">Extra items</label>
-          </div>
-
-          <hr class="my-4">
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="isPremiumShip" formControlName="isPremiumShip" (change)="calculatePrice()">
-            <label class="form-check-label" for="isPremiumShip">24hr. Express delivery</label>
-          </div>
-
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="startDate"
+              formControlName="startDate" placeholder="yyyy-mm-dd" (change)="calculatePrice()">
+              <label for="startDate">Booking start date</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="finishDate"
+              formControlName="finishDate" placeholder="yyyy-mm-dd" (change)="calculatePrice()">
+              <label for="finishDate">Booking expiration date</label>
+            </div>
+  
+            <hr class="my-4">
+  
+            <div class="form floating mb-3">
+              <select class="form-select" id="extraItems" formControlName="extraItems" (change)="calculatePrice()">
+                <option value="0">No extra items</option>
+                <option value="10.50">'{{album?.title}}' limited edition (+10.50 $)</option>
+                <option value="19.95">'{{album?.title}}' collectors edition (+19.95 $)</option>
+                <option value="14.99">Artist cool merchandise (+14.99 $)</option>
+              </select>
+              <label for="extraItems">Extra items</label>
+            </div>
+  
+            <hr class="my-4">
+  
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="isPremiumShip" formControlName="isPremiumShip" (change)="calculatePrice()">
+              <label class="form-check-label" for="isPremiumShip">24hr. Express delivery</label>
+            </div>
+  
+            
+  
           
-
+  
+            <button class="w-100 btn btn-primary btn-lg mt-5 mb-5" type="submit">Complete your booking</button>
+          </form>
+        }
         
-
-          <button class="w-100 btn btn-primary btn-lg mt-5 mb-5" type="submit">Complete your booking</button>
-        </form>
       </div>
     </div>
   </main>

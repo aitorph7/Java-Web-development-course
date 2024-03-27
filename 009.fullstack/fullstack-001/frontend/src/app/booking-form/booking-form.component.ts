@@ -4,17 +4,20 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Album } from '../model/album.model';
 import { ActivatedRoute } from '@angular/router';
 import { Booking } from '../model/booking.model';
+import { CurrencyPipe } from '@angular/common';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-booking-form',
   standalone: true,
-  imports: [HttpClientModule, ReactiveFormsModule],
+  imports: [HttpClientModule, ReactiveFormsModule, CurrencyPipe, NgbAlertModule],
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.css'
 })
 export class BookingFormComponent implements OnInit{
 
   album: Album | undefined;
+  booking: Booking | undefined;
 
   bookingForm = new FormGroup({
     startDate: new FormControl(new Date()),
@@ -29,6 +32,7 @@ export class BookingFormComponent implements OnInit{
   extraPrice = 0; // coste de los servicios extra
   totalPrice = 0;
   numDays = 0;
+  showFinishMessage = false; // para mostrtar un mensaje de ocnfirmación (desactivado por defecto).
 
   constructor(
     private httpClient: HttpClient,
@@ -118,5 +122,10 @@ export class BookingFormComponent implements OnInit{
       album: this.album
     }
     // enviar a backend con httpClient post
+    this.httpClient.post<Booking>('http://localhost:8080/bookings', booking)
+    .subscribe((booking: any) => {
+      this.booking = booking;
+      this.showFinishMessage = true;
+    })
   }
 }

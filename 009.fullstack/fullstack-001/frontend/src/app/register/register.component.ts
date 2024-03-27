@@ -44,6 +44,7 @@ export class RegisterComponent {
       email: this.registerForm.get('email')?.value ?? '',
       phone: this.registerForm.get('phone')?.value ?? '',
       password: this.registerForm.get('password')?.value ?? '',
+      passwordConfirm: ''
     }
     console.log(register);
     // Limpiar el formulario (o redirigir al login/home) tras enviar el registro al backend.
