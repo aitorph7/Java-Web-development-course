@@ -20,6 +20,7 @@ public class Artist {
     private Long id;
     private String name;
     private String country;
+    @Column(columnDefinition = "boolean") // así utilizará tinyint en lugar de bit.
     private Boolean active;
     private LocalDate estYear;
     private String photoUrl;

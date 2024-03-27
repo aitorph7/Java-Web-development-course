@@ -30,4 +30,5 @@ public class ArtistController {
     public Artist findById(@PathVariable Long id){
         return this.artistRepository.findById(id).orElseThrow();
     }
+    // TODO: crear el método POST con la funcionalidad de poder cargar una imagen del artista
 }
