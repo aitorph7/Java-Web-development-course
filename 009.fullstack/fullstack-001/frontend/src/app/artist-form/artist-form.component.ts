@@ -13,17 +13,38 @@ import { Artist } from '../model/artist.model';
 })
 export class ArtistFormComponent implements OnInit{
 
-  artist: Artist | undefined;
-
   artistForm = new FormGroup({
     name: new FormControl('')
   });
-  
+  photoFile: File | undefined;
+  photoPreview: string | undefined;
+
   constructor(private httpClient: HttpClient) {} //para enviar el artista que se cree al backend.
 
-
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
+  onFileChange(event: Event){
+    let target = event.target as HTMLInputElement; // este target es el imput de tipo file donde se carga el archivo.
 
+    if(target.files === null || target.files.length == 0){
+      return; // no se procesa ningún archivo.
+    }
+    this.photoFile = target.files[0]; /* guardo en 'photoFile' el archivo que esté en la posición 0.
+      para que cuando + adelante llamemos al método save(), podamos enviar el archivo al backend para
+      guardarlo en una carpeta, subirlo a un almacenamiento en la nube, etc.
+    */
+
+    // OPCIONAL: PREVISUALIZAR LA IMAGEN POR PANTALLA
+    let reader = new FileReader(); /* la clase 'reader' ayudará a leer el contenido del archivo con el siguiente par de funciones:
+      1. cuando se cargue el reader va a recibir un evento, y el resultado de la lectura lo guarda en una
+      nueva variable ('photoPreview').
+      2. le ordeno leer el evento.
+      */
+    reader.onload = event => this.photoPreview = reader.result as string;
+    reader.readAsDataURL(this.photoFile);
+  }
+  save(){
+
+  }
 }
