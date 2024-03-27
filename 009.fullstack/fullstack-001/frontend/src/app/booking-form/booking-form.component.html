@@ -71,10 +71,15 @@
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Booking details</h4>
         @if (showFinishMessage) {
-          <ngb-alert type="success" [dismissible]="false" style="min-height:150px;">
+          <ngb-alert type="success" [dismissible]="false" style="min-height:150px;" class="my-5">
             Album successfully reserved.
             <br>
             Your booking number is {{booking?.id}}
+            <br>
+            Your order will be delivered within next few hours. Should you need any support, please contact
+            <a href="mailto:customer.support@certidevs.com">customer.support&commat;certidevs.com</a>.
+
+            <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" routerLink="/albums">Back to Album List</button>
           </ngb-alert>
         } @else {
           <form class="needs-validation" novalidate="" [formGroup]="bookingForm" (submit)="save()">
