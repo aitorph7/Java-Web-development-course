@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      
+      <h1 class="my-5">Enter artist data
+      <form [formGroup]="artistForm">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+          id="name" formControlName="name">
+          <label for="name">Artist name</label>
+        </div>
+
+        <!-- El siguiente div llamará a un método que aún no existe (hay que crearlo) utilizando el evento 'change'-->
+        <div class="input-group">
+          <input type="file" class="form-control" id="photo">
+          <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+        </div>
+
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Save</button>
+
+      </form>
+      </h1>
+
+    </div>
+    <div class="col-lg-4">
+
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
+import { ArtistFormComponent } from './artist-form/artist-form.component';
 
 export const routes: Routes = [
   {
@@ -48,5 +49,9 @@ export const routes: Routes = [
   {
     path: 'artists',
     component: ArtistListComponent
+  },
+  {
+    path: 'artists/create',
+    component: ArtistFormComponent
   }
 ];
