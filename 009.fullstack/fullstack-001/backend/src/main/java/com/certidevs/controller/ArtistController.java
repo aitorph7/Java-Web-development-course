@@ -3,6 +3,7 @@ package com.certidevs.controller;
 import com.certidevs.model.Album;
 import com.certidevs.model.Artist;
 import com.certidevs.repository.ArtistRepository;
+import com.certidevs.service.FileService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @Slf4j
 public class ArtistController {
     private ArtistRepository artistRepository;
+    private FileService fileService;
 
     @GetMapping("artists")
     public List<Artist> findAll(){
@@ -28,11 +30,15 @@ public class ArtistController {
     public Artist findById(@PathVariable Long id){
         return this.artistRepository.findById(id).orElseThrow();
     }
-    // TODO: crear un método POST que reciba el artista y la imagen, guarde el archivo, obtenga la ruta al archivo
-    //  y la guarde en photoUrl. Nuevo controlador para servir loa archivos.
+    // TODO: crear un método POST que reciba el artista y la imagen, llame a un servicio inyectado (fileService) que
+    //  guarde el archivo con un método 'store' y me devuelva la ruta a él; guardaré esa ruta en el atributo
+    //  'artist.setPhotoUrl'.
+    //  Nuevo controlador para servir los archivos.
     @PostMapping("artists")
-    public Artist create(@RequestParam("photo") MultipartFile file){
-        System.out.println(file.getOriginalFilename());
-        return null;
+    public Artist create(@RequestParam("photo") MultipartFile file, Artist artist){
+
+        artist.setPhotoUrl(fileService.store(file));
+
+        return this.artistRepository.save(artist);
     }
 }
