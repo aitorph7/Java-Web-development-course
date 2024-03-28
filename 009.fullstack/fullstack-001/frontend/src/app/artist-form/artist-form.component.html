@@ -15,7 +15,7 @@
         <div class="input-group">
           <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
           <!-- $event es un objeto que crea JS y en el que viajan los datos del archivo.
-                El símbolo $ sirve para distinguirlo de otras variables presentes, como artistForm. -->
+              El símbolo $ sirve para distinguirlo de otras variables presentes, como artistForm. -->
           <button class="btn btn-outline-secondary" type="button" id="photoBtn">Upload</button>
         </div>
 
@@ -26,6 +26,11 @@
 
     </div>
     <div class="col-lg-4">
+
+      @if (photoPreview) {
+        <h2 class="my-5">Photo preview</h2>
+        <img class="img-fluid" [src]="photoPreview">
+      }
 
     </div>
   </div>

@@ -6,10 +6,8 @@ import com.certidevs.repository.ArtistRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,5 +28,11 @@ public class ArtistController {
     public Artist findById(@PathVariable Long id){
         return this.artistRepository.findById(id).orElseThrow();
     }
-    // TODO: crear el método POST con la funcionalidad de poder cargar una imagen del artista
+    // TODO: crear un método POST que reciba el artista y la imagen, guarde el archivo, obtenga la ruta al archivo
+    //  y la guarde en photoUrl. Nuevo controlador para servir loa archivos.
+    @PostMapping("artists")
+    public Artist create(@RequestParam("photo") MultipartFile file){
+        System.out.println(file.getOriginalFilename());
+        return null;
+    }
 }

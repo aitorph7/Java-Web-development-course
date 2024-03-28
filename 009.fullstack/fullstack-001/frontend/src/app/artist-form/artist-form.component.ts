@@ -21,9 +21,8 @@ export class ArtistFormComponent implements OnInit{
 
   constructor(private httpClient: HttpClient) {} //para enviar el artista que se cree al backend.
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
+
   onFileChange(event: Event){
     let target = event.target as HTMLInputElement; // este target es el imput de tipo file donde se carga el archivo.
 
@@ -36,15 +35,27 @@ export class ArtistFormComponent implements OnInit{
     */
 
     // OPCIONAL: PREVISUALIZAR LA IMAGEN POR PANTALLA
-    let reader = new FileReader(); /* la clase 'reader' ayudará a leer el contenido del archivo con el siguiente par de funciones:
+    let reader = new FileReader(); /* la clase 'reader' ayudará a leer el contenido del archivo con el
+        siguiente par de funciones:
       1. cuando se cargue el reader va a recibir un evento, y el resultado de la lectura lo guarda en una
-      nueva variable ('photoPreview').
+          nueva variable ('photoPreview').
       2. le ordeno leer el evento.
       */
     reader.onload = event => this.photoPreview = reader.result as string;
     reader.readAsDataURL(this.photoFile);
   }
-  save(){
-
+  save(){ //crear FormData
+    let formData = new FormData();
+    if(this.photoFile){
+      formData.append("photo", this.photoFile); // introducir el photoFile.
+    }
+    formData.append('name', this.artistForm.get('name')?.value ?? ''); // introducir los datos del artista.
+    // httpClient post para enviar el formData al backend:
+    this.httpClient.post<Artist>('http://localhost:8080/artists', formData)
+    .subscribe((artist: any) => {
+      this.photoFile = undefined;
+      this.photoPreview = undefined;
+      console.log(artist)
+    });
   }
 }
