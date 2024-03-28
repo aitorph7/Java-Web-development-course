@@ -38,7 +38,7 @@ public class AlbumController {
 //    }
 
     // obtener álbumes filtrando por artista:
-    @GetMapping("artists/filter-by-artist/{id}")
+    @GetMapping("albums/filter-by-artist/{id}")
     public List<Album> findAllByArtistId (@PathVariable Long id){
         return this.albumRepository.findAllByArtist_Id(id);
     }

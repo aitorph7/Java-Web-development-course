@@ -1,7 +1,7 @@
 
 @if (artist) {
   <div class="px-4 py-5 mt-5 text-center">
-    <img class="d-block mx-auto mb-4 rounded-circle" [src]="artist.photoUrl" alt="" style="max-width: 150px;">
+    <img class="d-block mx-auto mb-4 rounded-circle" [src]="artist.photoUrl" alt="" style="max-width: 300px;">
     <h1 class="display-5 fw-bold text-body-emphasis">{{artist.name}}</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">{{artist.bio}}</p>
@@ -47,17 +47,14 @@
               </td>
               <td>{{album.releaseDate | date:"yyyy/MM/dd"}}</td>
               <td>
-                <a class="badge text-bg-secondary text-decoration-none" [routerLink]="['/artists', album.artist.id, 'detail']">
-                  {{album.artist.name}}
-                </a>
-              </td>
-              <td>
-                <a class="badge text-bg-warning text-decoration-none" [routerLink]="['/recordCompanies', album.recordCompany.id, 'detail']">
+                <a class="badge text-bg-secondary text-decoration-none" [routerLink]="['/recordCompanies', album.recordCompany.id, 'detail']">
                   {{album.recordCompany.name}}
                 </a>
               </td>
               <td>
-                <button class="btn btn-info" [routerLink]="['/albums', album.id, 'detail']">View album</button>
+                <a class="badge text-bg-warning text-decoration-none" [routerLink]="['/albums', album.id, 'detail']">
+                View album
+                </a>
               </td>
             </tr>
           } @empty {
