@@ -18,6 +18,7 @@ export class ArtistFormComponent implements OnInit{
   });
   photoFile: File | undefined;
   photoPreview: string | undefined;
+  artist: Artist | undefined;
 
   constructor(private httpClient: HttpClient) {} //para enviar el artista que se cree al backend.
 
@@ -55,7 +56,8 @@ export class ArtistFormComponent implements OnInit{
     .subscribe((artist: any) => {
       this.photoFile = undefined;
       this.photoPreview = undefined;
-      console.log(artist)
+      console.log(artist);
+      this.artist = artist; // así guardo el artista.
     });
   }
 }
