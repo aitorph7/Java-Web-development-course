@@ -37,8 +37,13 @@ public class ArtistController {
     public Artist create(
             @RequestParam(value = "photo", required = false) MultipartFile file,
             Artist artist){
-        String filename = fileService.store(file);
-        artist.setPhotoUrl(filename);
+
+        if (file != null && !file.isEmpty()){
+            String filename = fileService.store(file);
+            artist.setPhotoUrl(filename);
+        } else { // si el artista llega sin foto, le asigno el avatar por defecto (guardado en 'uploads').
+            artist.setPhotoUrl("avatar.webp");
+        }
         return this.artistRepository.save(artist);
     }
 }

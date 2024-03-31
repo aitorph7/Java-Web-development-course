@@ -53,5 +53,9 @@ export const routes: Routes = [
   {
     path: 'artists/create',
     component: ArtistFormComponent
+  },
+  {
+    path: 'artists/:id/update',
+    component: ArtistFormComponent
   }
 ];

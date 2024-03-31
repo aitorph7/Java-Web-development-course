@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Artist } from '../model/artist.model';
 
 @Component({
@@ -14,15 +14,34 @@ import { Artist } from '../model/artist.model';
 export class ArtistFormComponent implements OnInit{
 
   artistForm = new FormGroup({
-    name: new FormControl('')
+    id: new FormControl(0),
+    name: new FormControl(''),
+    country: new FormControl(''),
+    active: new FormControl(false),
+    estYear: new FormControl<Date>(new Date()),
+    photoUrl: new FormControl(''),
+    bio: new FormControl('')
   });
   photoFile: File | undefined;
   photoPreview: string | undefined;
   artist: Artist | undefined;
+  isUpdate: boolean = false;
 
-  constructor(private httpClient: HttpClient) {} //para enviar el artista que se cree al backend.
+  constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute) {} //para enviar el artista que se cree al backend.
 
-  ngOnInit(): void {}
+  ngOnInit(): void { //que cuando cargue la pantalla, cargue tb el artista en el formulario.
+    this.activatedRoute.params.subscribe((params: any) => {
+      const id = params['id'];
+      if (!id) return;
+
+      this.httpClient.get<Artist>('http://localhost:8080/artists/' + id)
+      .subscribe((artist: any) => {
+        this.artistForm.reset(artist);
+        this.isUpdate = true;
+        this.artist = artist;
+      });
+    });
+  }
 
   onFileChange(event: Event){
     let target = event.target as HTMLInputElement; // este target es el imput de tipo file donde se carga el archivo.
