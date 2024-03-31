@@ -25,21 +25,11 @@ public class FileService {
          duplicidad en el nombre (2 usuarios pueden subir un archivo con el
           mismo nombre, P. ej. 'avatar.svg').
         */
-        String originalFileName = file.getOriginalFilename();
-        if(originalFileName == null || file.isEmpty())
-            return ""; // devuelvo un String vacío.
-
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        String extension = StringUtils.getFilenameExtension(fileName);
-        String fileNameWithoutExt = fileName.replace("." + extension, "");
-
-        String newFileName = fileNameWithoutExt + "-" + UUID.randomUUID() + "." + extension;
-        System.out.println(newFileName);
-        // TODO toda esta 1ª parte la puedo extraer a un método 'GenerateNewFileName' P. ej.
-
+        String newFileName = generateUniqueName(file);
+        // TODO (previamente arriba había un bloque de código de 5-6 líneas) toda esta 1ª parte la he extraído
+        //  a un método 'GenerateUniqueName' P. ej., seleccionando todo el bloque + clic dcho. "extract method".
         /*
         Ahora que tengo un nuevo nombre...
-
         OBLIGATORIO: Guardar el archivo en el file system:
         'InputStream' es una de las APIs para poder interactuar con entrada y salida. Al intentar acceder al archivo
         puede lanzar una excepción, que puedo capturar con 'tryCatch'
@@ -52,13 +42,22 @@ public class FileService {
             return newFileName; // nombre del archivo almacenado
         } catch (IOException e) {
             log.error("Reading/Saving file error", e);
+            throw new FileException("Reading/Saving file error");
         }
         /* este método solo ha guardado el archivo...
         TODO almacenarlo en el artista + idear cómo servirlo (acceder a él a través de un 'FileController' P. ej.)
          */
+    }
+    private String generateUniqueName(MultipartFile file) { // al extraer el método 'generateUniqueName' he debido
+        // eliminar la declaración 'static' de este otro método
+        String originalFileName = file.getOriginalFilename();
+        if(!StringUtils.hasLength(originalFileName) || file.isEmpty())
+            throw new FileException("Reading file error");
 
-        return "";
-
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String extension = StringUtils.getFilenameExtension(fileName);
+        String fileNameWithoutExt = fileName.replace("." + extension, "");
+        return fileNameWithoutExt + "-" + UUID.randomUUID() + "." + extension;
     }
 
     public Resource load(String name) {
@@ -70,11 +69,11 @@ public class FileService {
         try {
             Resource resource = new UrlResource(file.toUri());
             if(!resource.exists() || !resource.isReadable())
-                return null;
+                throw new FileException("Uploading file error");
 
             return resource;
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new FileException("Uploading file error");
         }
     }
 }
