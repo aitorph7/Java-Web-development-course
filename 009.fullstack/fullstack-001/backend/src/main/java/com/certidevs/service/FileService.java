@@ -1,5 +1,6 @@
 package com.certidevs.service;
 
+import com.certidevs.exception.FileException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -48,22 +49,11 @@ public class FileService {
         TODO almacenarlo en el artista + idear cómo servirlo (acceder a él a través de un 'FileController' P. ej.)
          */
     }
-    private String generateUniqueName(MultipartFile file) { // al extraer el método 'generateUniqueName' he debido
-        // eliminar la declaración 'static' de este otro método
-        String originalFileName = file.getOriginalFilename();
-        if(!StringUtils.hasLength(originalFileName) || file.isEmpty())
-            throw new FileException("Reading file error");
-
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        String extension = StringUtils.getFilenameExtension(fileName);
-        String fileNameWithoutExt = fileName.replace("." + extension, "");
-        return fileNameWithoutExt + "-" + UUID.randomUUID() + "." + extension;
-    }
 
     public Resource load(String name) {
         /*
          'Resource' es una interface para representar los inputStreams
-         y que sean accesible desde una url.
+         y que sean accesibles desde una url.
         */
         Path file = Paths.get("uploads").resolve(name);
         try {
@@ -76,4 +66,24 @@ public class FileService {
             throw new FileException("Uploading file error");
         }
     }
+
+    private String generateUniqueName(MultipartFile file) { // al extraer el método 'generateUniqueName' he debido
+        // eliminar la declaración 'static' de este otro método
+        String originalFileName = file.getOriginalFilename();
+        if(!StringUtils.hasLength(originalFileName) || file.isEmpty())
+            throw new FileException("Reading file error");
+
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String extension = StringUtils.getFilenameExtension(fileName);
+        String fileNameWithoutExt = fileName.replace("." + extension, "");
+        return fileNameWithoutExt + "-" + UUID.randomUUID() + "." + extension;
+    }
+    /* Se suelen colocar 1º los métodos públicos y al final los privados.
+        El siguiente paso:
+        Si voy a usar FileService en muchos métodos de diferentes controladores, tendré
+        que incluir un 'try catch' en todos.
+        Será mejor crear una clase que se encargue de administrar todas las
+        excepciones de forma personalizada y que les ponga un mensaje en la salida.
+        ... así que creo el package 'exception'.
+    */
 }
