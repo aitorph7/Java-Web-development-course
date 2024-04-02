@@ -21,7 +21,6 @@ public class ArtistController {
 
     @GetMapping("artists")
     public List<Artist> findAll(){
-        log.info("REST request to findAll artists");
         return this.artistRepository.findAll();
     }
     @GetMapping("artists/{id}")

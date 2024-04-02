@@ -24,6 +24,8 @@ public class Album {
     private Double price;
     private Boolean published;
     private LocalDate releaseDate;
+    @Enumerated(EnumType.STRING)
+    private AlbumType type;
 
     @ManyToOne
     private Artist artist;

@@ -1,6 +1,7 @@
 package com.certidevs;
 
 import com.certidevs.model.Album;
+import com.certidevs.model.AlbumType;
 import com.certidevs.model.Artist;
 import com.certidevs.model.RecordCompany;
 import com.certidevs.repository.AlbumRepository;
@@ -41,7 +42,7 @@ public class BackendApplication {
 
 		Artist artist1 = new Artist(null, "Mike Oldfield", "England", false, LocalDate.of(1967, 1, 1), "https://cdn.galleries.smcloud.net/t/galleries/gf-7DRQ-y1Y3-nHpu_mike-oldfield-swietuje-50-lecie-tubular-bells-994x828.jpg", "Texto largo de leer");
 		Artist artist2 = new Artist(null, "Simple Minds", "Scotland", true, LocalDate.of(1977, 1,1),"https://i.guim.co.uk/img/media/b37b81eafad5508816f3a6fcf9acd8594a4d411a/0_496_7543_4526/master/7543.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=1f2460f92ab0d54f51c91fe79a45e899", "Texto largo de leer");
-		Artist artist3 = new Artist(null, "Roy Orbison", "USA", false, LocalDate.of(1953, 1, 1),"https://www.garrettleight.com/cdn/shop/articles/Roy-Orbison-1.jpg?v=1634081775", "Texto largo de leer");
+		Artist artist3 = new Artist(null, "Roy Orbison", "USA", false, LocalDate.of(1953, 1, 1),"https://placehold.co/400", "Texto largo de leer");
 		Artist artist4 = new Artist(null, "Alice in Chains", "USA", true, LocalDate.of(1987, 1, 1),"https://www.musicmaniarecords.be/media/artist-photo/139572-alice-in-chains-band-pic.jpg", "Texto largo de leer");
 		Artist artist5 = new Artist(null, "Depeche Mode", "England", true, LocalDate.of(1980, 1, 1),"https://www.bremeneins.de/bilder/imago-6390~_v-1600x1600_c-1675325322983.jpg", "Texto largo de leer");
 		Artist artist6 = new Artist(null, "Manowar", "USA", true, LocalDate.of(1980, 1, 1),"https://c02.purpledshub.com/uploads/sites/16/2022/09/1950808_65310b9aab.jpg", "Texto largo de leer");
@@ -56,11 +57,11 @@ public class BackendApplication {
 
 		// antes de asociar artistas y discográficas a los álbumes, hay que guardarlos! ojo 👁
 
-		albumRepository.save(new Album(null, "Tubular Bells", "1111VG001", 19.95, true, LocalDate.of(1973, 5, 25), artist1, company1));
-		albumRepository.save(new Album(null, "Sons and Fascination", "2222VG002", 23.45, true, LocalDate.of(1981, 9, 15), artist2, company1));
-		albumRepository.save(new Album(null, "Mystery Girl", "3333VG003", 16.99, true, LocalDate.of(1989,1,31), artist3, company1));
-		albumRepository.save(new Album(null, "Master of Puppets", "4444EL004", 19.99, true, LocalDate.of(1986,3,3), artist7, company2));
-		albumRepository.save(new Album(null, "A Kind of Magic", "8888EM008", 15.50, true, LocalDate.of(1986,6,2), artist8, company3));
+		albumRepository.save(new Album(null, "Tubular Bells", "1111VG001", 19.95, true, LocalDate.of(1973, 5, 25), AlbumType.VINYL, artist1, company1));
+		albumRepository.save(new Album(null, "Sons and Fascination", "2222VG002", 23.45, true, LocalDate.of(1981, 9, 15), AlbumType.CD, artist2, company1));
+		albumRepository.save(new Album(null, "Mystery Girl", "3333VG003", 16.99, true, LocalDate.of(1989,1,31),AlbumType.VINYL, artist3, company1));
+		albumRepository.save(new Album(null, "Master of Puppets", "4444EL004", 19.99, true, LocalDate.of(1986,3,3), AlbumType.CD, artist7, company2));
+		albumRepository.save(new Album(null, "A Kind of Magic", "8888EM008", 15.50, true, LocalDate.of(1986,6,2), AlbumType.CD, artist8, company3));
 
 	}
 

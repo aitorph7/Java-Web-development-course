@@ -60,7 +60,6 @@ public class FileService {
             Resource resource = new UrlResource(file.toUri());
             if(!resource.exists() || !resource.isReadable())
                 throw new FileException("Uploading file error");
-
             return resource;
         } catch (MalformedURLException e) {
             throw new FileException("Uploading file error");
@@ -72,8 +71,7 @@ public class FileService {
         String originalFileName = file.getOriginalFilename();
         if(!StringUtils.hasLength(originalFileName) || file.isEmpty())
             throw new FileException("Reading file error");
-
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(originalFileName);
         String extension = StringUtils.getFilenameExtension(fileName);
         String fileNameWithoutExt = fileName.replace("." + extension, "");
         return fileNameWithoutExt + "-" + UUID.randomUUID() + "." + extension;

@@ -37,6 +37,7 @@ export class AlbumFormComponent implements OnInit{
     price: new FormControl<number>(0.0),
     published: new FormControl<boolean>(true),
     releaseDate: new FormControl<Date>(new Date()),
+    type: new FormControl(),
     artist: new FormControl(),
     recordCompany: new FormControl()
   });
@@ -61,7 +62,7 @@ export class AlbumFormComponent implements OnInit{
     this.httpClient.get<Artist[]>('http://localhost:8080/artists')
     .subscribe((artists: any) => this.artists = artists);
 
-    this.httpClient.get<RecordCompany[]>('http://localhost:800/recordCompanies')
+    this.httpClient.get<RecordCompany[]>('http://localhost:8080/recordCompanies')
     .subscribe((recordCompanies: any) => this.recordCompanies = recordCompanies);
 
     this.activatedRoute.params.subscribe((params: any) => {
@@ -71,16 +72,7 @@ export class AlbumFormComponent implements OnInit{
       this.httpClient.get<Album>('http://localhost:8080/albums/' + id)
       .subscribe((albumFromBackend: any) => {
         // cargar el album obtenido en el formulario albumForm
-        this.albumForm.reset({
-          id: albumFromBackend.id,
-          title: albumFromBackend.title,
-          catalogNumber: albumFromBackend.catalogNumber,
-          price: albumFromBackend.price,
-          published: albumFromBackend.published,
-          releaseDate: albumFromBackend.releaseDate,
-          artist: albumFromBackend.artist,
-          recordCompany: albumFromBackend.recordCompany
-        });
+        this.albumForm.reset(albumFromBackend);
         
         // marcar boolean isUpdate true
         this.isUpdate = true;
