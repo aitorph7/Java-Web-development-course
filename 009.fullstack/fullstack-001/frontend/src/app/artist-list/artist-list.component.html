@@ -4,7 +4,8 @@
   <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
     @for (artist of artists; track artist.id) {
       <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" [style.background-image]="'url('+ artist.photoUrl +')'">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
+        [style.background-image]="'url(http://localhost:8080/files/'+ artist.photoUrl +')'">
           <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
             <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{artist.name}}</h3>
             <ul class="d-flex list-unstyled mt-auto">
@@ -13,11 +14,14 @@
                 {{artist.country}}
               </li>
               
-              
               <li class="d-flex align-items-center">
-                <button class="btn btn-primary btn-sm" [routerLink]="['/artists', artist.id, 'detail']">
+                <button class="btn btn-primary btn-sm me-2" [routerLink]="['/artists', artist.id, 'detail']">
                   View
-                  <i class="bi bi-arrow-right ms-2"></i>
+                  <i class="bi bi-eye ms-2"></i>
+                </button>
+                <button class="btn btn-success btn-sm" [routerLink]="['/artists', artist.id, 'update']">
+                  Edit
+                  <i class="bi bi-pencil ms-2"></i>
                 </button>
               </li>
             </ul>

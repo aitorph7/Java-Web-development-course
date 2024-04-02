@@ -80,19 +80,22 @@ export class ArtistFormComponent implements OnInit{
     
     if(this.isUpdate){
         // httpClient post para enviar el formData al backend:
-      this.httpClient.put<Artist>('http://localhost:8080/artists' + this.artist?.id, formData)
-      .subscribe((artist: any) => this.resetArtist(artist)); // así actualizo el artista.
+      this.httpClient.put<Artist>('http://localhost:8080/artists/' + this.artist?.id, formData)
+      .subscribe((artist: any) => this.navigateToList()); // así actualizo el artista.
     } else {
       this.httpClient.post<Artist>('http://localhost:8080/artists', formData)
-      .subscribe((artist: any) => this.resetArtist(artist)); // así guardo el artista.
+      .subscribe((artist: any) => this.navigateToList()); // así guardo el artista.
     }
   }
 
-  private resetArtist(artist: any) {
+  private navigateToList() { // cuando edite o cree un artista, que se navegue de nuevo al listado por si deseo ver o editar.
+    this.router.navigate(['/artists'])
+    /*
     this.photoFile = undefined;
     this.photoPreview = undefined;
     console.log(artist);
     this.artist = artist;
     this.artistForm.reset(artist); // así actualizo el id + el photoUrl en el formulario
+    */
   }
 }

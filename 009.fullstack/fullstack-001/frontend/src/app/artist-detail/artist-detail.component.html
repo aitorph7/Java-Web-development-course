@@ -1,13 +1,15 @@
 
 @if (artist) {
   <div class="px-4 py-5 mt-5 text-center">
-    <img class="d-block mx-auto mb-4 rounded-circle" [src]="artist.photoUrl" alt="" style="max-width: 300px;">
+    <img class="d-block mx-auto mb-4 rounded-circle" [src]="'http://localhost:8080/files/' + artist.photoUrl" alt="" style="max-width: 300px;">
     <h1 class="display-5 fw-bold text-body-emphasis">{{artist.name}}</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">{{artist.bio}}</p>
-      <div class="d-grid gap-2 d-sm-flex justify-comtent-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Delete</button>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" [routerLink]="['/artists', artist.id, 'update']">
+          Edit
+          <i class="bi bi-pencil ms-2"></i>
+        </button>
       </div>
     </div>
   </div>
