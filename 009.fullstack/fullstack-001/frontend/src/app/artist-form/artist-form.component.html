@@ -5,18 +5,47 @@
       <h1 class="my-5">Enter artist data</h1>
       <form [formGroup]="artistForm" (ngSubmit)="save()">
 
+        <input type="hidden" formControlName="id"> <!-- los campos ocultos sirven para conservar cierta
+        información que no quiero perder al realizar alguna actualización. -->
+        
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
           id="name" formControlName="name">
           <label for="name">Artist name</label>
         </div>
 
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+          id="country" formControlName="country">
+          <label for="name">Country</label>
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="active" formControlName="active">
+          <label class="form-check-label" for="active" style="cursor:pointer;">
+            Active
+          </label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="estYear" formControlName="estYear">
+          <label for="estYear">Establishment year</label>
+        </div>
+
+        <input type="hidden" formControlName="photoUrl"> <!-- cuando vas a editar un artista que ya tiene
+        foto, la ruta a dicha foto se cargue en 'photoUrl' y así no se pierda al enviar la actualización. -->
+
         <!-- El siguiente div llamará a un método (onFileChange) que aún no existe (hay que crearlo) utilizando el evento 'change'-->
-        <div class="input-group">
+        <div class="input-group mb-3">
           <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
           <!-- $event es un objeto que crea JS y en el que viajan los datos del archivo.
               El símbolo $ sirve para distinguirlo de otras variables presentes, como artistForm. -->
           <button class="btn btn-outline-secondary" type="button" id="photoBtn">Upload</button>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control" placeholder="Leave a comment here" id="bio" formControlName="bio" style="min-height: 120px;"></textarea>
+          <label for="bio">Biography</label>
         </div>
 
         <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Save</button>

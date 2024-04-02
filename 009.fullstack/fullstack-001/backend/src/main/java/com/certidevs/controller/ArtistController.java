@@ -5,6 +5,7 @@ import com.certidevs.repository.ArtistRepository;
 import com.certidevs.service.FileService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,8 +43,22 @@ public class ArtistController {
             String filename = fileService.store(file);
             artist.setPhotoUrl(filename);
         } else { // si el artista llega sin foto, le asigno el avatar por defecto (guardado en 'uploads').
-            artist.setPhotoUrl("avatar.webp");
+            artist.setPhotoUrl("avatar.png");
         }
         return this.artistRepository.save(artist);
+    }
+    @PutMapping("artists/{id}")
+    public ResponseEntity<Artist> update(
+            @PathVariable Long id,
+            Artist artist,
+            @RequestParam(value = "photo", required = false) MultipartFile file
+    ){
+        if (!this.artistRepository.existsById(id))
+            return ResponseEntity.notFound().build();
+        if (file != null && !file.isEmpty()) {
+            String fileName = fileService.store(file);
+            artist.setPhotoUrl(fileName);
+        }
+        return ResponseEntity.ok(this.artistRepository.save(artist));
     }
 }

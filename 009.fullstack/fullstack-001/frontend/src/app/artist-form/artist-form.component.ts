@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Artist } from '../model/artist.model';
 
 @Component({
@@ -27,7 +27,7 @@ export class ArtistFormComponent implements OnInit{
   artist: Artist | undefined;
   isUpdate: boolean = false;
 
-  constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute) {} //para enviar el artista que se cree al backend.
+  constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {} //para enviar el artista que se cree al backend.
 
   ngOnInit(): void { //que cuando cargue la pantalla, cargue tb el artista en el formulario.
     this.activatedRoute.params.subscribe((params: any) => {
@@ -66,17 +66,33 @@ export class ArtistFormComponent implements OnInit{
   }
   save(){ //crear FormData
     let formData = new FormData();
+    formData.append('id', this.artistForm.get('id')?.value?.toString() ?? '0');
+    formData.append('name', this.artistForm.get('name')?.value ?? ''); // introducir los datos del artista.
+    formData.append('country', this.artistForm.get('country')?.value ?? '');
+    formData.append('active', this.artistForm.get('active')?.value ?.toString() ?? 'false');
+    formData.append('estYear', this.artistForm.get('estYear')?.value?.toString() ?? '0');
+    formData.append('photourl', this.artistForm.get('photoUrl')?.value ?? '');
+    formData.append('bio', this.artistForm.get('bio')?.value ?? '');
+
     if(this.photoFile){
       formData.append("photo", this.photoFile); // introducir el photoFile.
     }
-    formData.append('name', this.artistForm.get('name')?.value ?? ''); // introducir los datos del artista.
-    // httpClient post para enviar el formData al backend:
-    this.httpClient.post<Artist>('http://localhost:8080/artists', formData)
-    .subscribe((artist: any) => {
-      this.photoFile = undefined;
-      this.photoPreview = undefined;
-      console.log(artist);
-      this.artist = artist; // así guardo el artista.
-    });
+    
+    if(this.isUpdate){
+        // httpClient post para enviar el formData al backend:
+      this.httpClient.put<Artist>('http://localhost:8080/artists' + this.artist?.id, formData)
+      .subscribe((artist: any) => this.resetArtist(artist)); // así actualizo el artista.
+    } else {
+      this.httpClient.post<Artist>('http://localhost:8080/artists', formData)
+      .subscribe((artist: any) => this.resetArtist(artist)); // así guardo el artista.
+    }
+  }
+
+  private resetArtist(artist: any) {
+    this.photoFile = undefined;
+    this.photoPreview = undefined;
+    console.log(artist);
+    this.artist = artist;
+    this.artistForm.reset(artist); // así actualizo el id + el photoUrl en el formulario
   }
 }
