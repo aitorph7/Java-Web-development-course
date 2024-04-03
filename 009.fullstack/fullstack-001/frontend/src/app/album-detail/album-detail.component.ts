@@ -3,11 +3,12 @@ import { Album } from '../model/album.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Rating } from '../model/rating.model';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-album-detail',
   standalone: true,
-  imports: [HttpClientModule, RouterLink],
+  imports: [HttpClientModule, RouterLink, NgbRatingModule],
   templateUrl: './album-detail.component.html',
   styleUrl: './album-detail.component.css'
 })
