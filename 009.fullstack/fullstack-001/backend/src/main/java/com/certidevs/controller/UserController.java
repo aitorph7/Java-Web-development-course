@@ -2,10 +2,10 @@ package com.certidevs.controller;
 
 import com.certidevs.dto.Login;
 import com.certidevs.dto.Register;
+import com.certidevs.dto.Token;
 import com.certidevs.model.User;
 import com.certidevs.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin("*")
 @RestController
@@ -37,7 +39,7 @@ public class UserController {
         this.userRepository.save(user);
     }
     @PostMapping("users/login")
-    public void login(@RequestBody Login login){
+    public Token login(@RequestBody Login login){
 
         // si el email no existe no se puede logear
         if(!this.userRepository.existsByEmail(login.email())){
@@ -49,17 +51,29 @@ public class UserController {
         if (user.getPassword().equals(login.password())){
             throw new RuntimeException("Incorrect password");
         }
-        // JWT Json Web Token: jwt.io
-        // Generar TOKEN de acceso importando una librería
-        // Generar el token: https://github.com/...
+        /*
+         JWT Json Web Token: jwt.io
+         Generar TOKEN de acceso importando una librería
+         Generar el token: https://github.com/...
+        */
+        Date issuedDate = new Date();
+        long nextWeekMillis = TimeUnit.DAYS.toMillis(7);
+        Date expirationDate = new Date(issuedDate.getTime() + nextWeekMillis);
+        byte[] key = Base64.getDecoder().decode("PwUAIxpZLYjsyjzi62bY4or99ZLFISl7y47RWBmm+bs=");
+
         String token = Jwts.builder()
-                .signWith(Keys.hmacShaKeyFor("admin".getBytes()), SignatureAlgorithm.HS512)
-                .setHeaderParam("typ", "JWT")
-                .setSubject(String.valueOf(user.getId()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + (3600 * 24 * 1000)))
-                .claim("email", user.getEmail())
+                // id del usuario:
+                .subject(String.valueOf(user.getId()))
+                // la clave secreta para firmar el token y saber que es nuestro cuando lleguen las peticiones del frontend:
+                .signWith(Keys.hmacShaKeyFor(key))
+                // fecha emisión del token:
+                .issuedAt(issuedDate)
+                // fecha de expiración del token:
+                .expiration(expirationDate)
+                // información personalizada: rol, username, email...
                 .claim("role", "admin")
+                // construye el token:
                 .compact();
+        return new Token(token);
     }
 }
