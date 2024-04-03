@@ -1,11 +1,9 @@
 package com.certidevs;
 
-import com.certidevs.model.Album;
-import com.certidevs.model.AlbumType;
-import com.certidevs.model.Artist;
-import com.certidevs.model.RecordCompany;
+import com.certidevs.model.*;
 import com.certidevs.repository.AlbumRepository;
 import com.certidevs.repository.ArtistRepository;
+import com.certidevs.repository.RatingRepository;
 import com.certidevs.repository.RecordCompanyRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,6 +29,7 @@ public class BackendApplication {
 		AlbumRepository albumRepository = context.getBean(AlbumRepository.class);
 		ArtistRepository artistRepository = context.getBean(ArtistRepository.class);
 		RecordCompanyRepository recordCompanyRepository = context.getBean(RecordCompanyRepository.class);
+		RatingRepository ratingRepository = context.getBean(RatingRepository.class);
 
 		/*
 		1º borro los álbumes porque tienen asociaciones hacia artistas y discográficas.
@@ -39,6 +38,7 @@ public class BackendApplication {
 		albumRepository.deleteAll(); // Borro los datos que haya para que se generen nuevos datos.
 		recordCompanyRepository.deleteAll();
 		artistRepository.deleteAll();
+		// ratingRepository.deleteAll();
 
 		Artist artist1 = new Artist(null, "Mike Oldfield", "England", false, LocalDate.of(1967, 1, 1), "https://cdn.galleries.smcloud.net/t/galleries/gf-7DRQ-y1Y3-nHpu_mike-oldfield-swietuje-50-lecie-tubular-bells-994x828.jpg", "Texto largo de leer");
 		Artist artist2 = new Artist(null, "Simple Minds", "Scotland", true, LocalDate.of(1977, 1,1),"https://i.guim.co.uk/img/media/b37b81eafad5508816f3a6fcf9acd8594a4d411a/0_496_7543_4526/master/7543.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=1f2460f92ab0d54f51c91fe79a45e899", "Texto largo de leer");
@@ -57,12 +57,17 @@ public class BackendApplication {
 
 		// antes de asociar artistas y discográficas a los álbumes, hay que guardarlos! ojo 👁
 
-		albumRepository.save(new Album(null, "Tubular Bells", "1111VG001", 19.95, true, LocalDate.of(1973, 5, 25), AlbumType.VINYL, artist1, company1));
+		Album a1 = new Album(null, "Tubular Bells", "1111VG001", 19.95, true, LocalDate.of(1973, 5, 25), AlbumType.VINYL, artist1, company1);
+		albumRepository.save(a1);
 		albumRepository.save(new Album(null, "Sons and Fascination", "2222VG002", 23.45, true, LocalDate.of(1981, 9, 15), AlbumType.CD, artist2, company1));
 		albumRepository.save(new Album(null, "Mystery Girl", "3333VG003", 16.99, true, LocalDate.of(1989,1,31),AlbumType.VINYL, artist3, company1));
 		albumRepository.save(new Album(null, "Master of Puppets", "4444EL004", 19.99, true, LocalDate.of(1986,3,3), AlbumType.CD, artist7, company2));
 		albumRepository.save(new Album(null, "A Kind of Magic", "8888EM008", 15.50, true, LocalDate.of(1986,6,2), AlbumType.CD, artist8, company3));
 
+		Rating r1 = new Rating(null, 9, "Great album", a1, null);
+		Rating r2 = new Rating(null, 4, "Long and boring album", a1, null);
+		Rating r3 = new Rating(null, 5, "Such an original album", a1, null);
+		ratingRepository.saveAll(List.of(r1, r2, r3));
 	}
 
 }
