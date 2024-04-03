@@ -5,7 +5,7 @@ export interface Rating {
   id: number;
   score: number;
   comment: string;
-  album: Album;
-  user: User;
+  album?: Album; // declaro '?' para que sea opcional.
+  user?: User;
 
 }

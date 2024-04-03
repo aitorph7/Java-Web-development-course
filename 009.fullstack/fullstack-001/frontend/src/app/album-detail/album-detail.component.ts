@@ -4,18 +4,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Rating } from '../model/rating.model';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-album-detail',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, NgbRatingModule],
+  imports: [HttpClientModule, RouterLink, NgbRatingModule, ReactiveFormsModule],
   templateUrl: './album-detail.component.html',
   styleUrl: './album-detail.component.css'
 })
 export class AlbumDetailComponent implements OnInit{
 
-  album: Album | undefined; // importo un objeto de la clase Album.
+  album: Album | undefined; // cargo un objeto de la clase Album.
   ratings: Rating[] = [];
+  ratingForm = new FormGroup({
+    score: new FormControl(0),
+    comment: new FormControl('')
+  });
 
   constructor(
     private activatedRoute: ActivatedRoute, // Porque lo necesito para acceder al param 'id' de la url.
@@ -53,4 +58,21 @@ export class AlbumDetailComponent implements OnInit{
     });
   }
 
+  save(){ // Creo un objeto Rating.
+    const rating: Rating = {
+      id: 0,
+      score: this.ratingForm.get('score')?.value ?? 0,
+      comment: this.ratingForm.get('comment')?.value ?? '',
+      album: this.album // uso el objeto 'album' cargado al comienzo.
+    };
+
+    // Para enviar el rating al backend:
+    this.httpClient.post<Rating>('http://localhost:8080/ratings', rating).subscribe((rating: any) => {
+        // Reseteo el formulario para que quede vacío...
+        this.ratingForm.reset();
+        // y cargo de nuevo todos los ratings del álbum (copiando el código declarado más arriba)
+        this.httpClient.get<Rating[]>('http://localhost:8080/ratings/filter-by-album/' + this.album?.id)
+        .subscribe((ratings: any) => this.ratings = ratings);
+    });
+  }
 }

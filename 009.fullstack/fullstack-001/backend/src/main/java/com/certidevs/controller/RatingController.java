@@ -20,13 +20,13 @@ public class RatingController {
     public Rating create(@RequestBody() Rating rating) {
         return this.ratingRepository.save(rating);
     }
-    /*
-     No quiero mostrar un listado de ratings, sino que quiero mostrar
+
+
+    /* No quiero mostrar un listado de ratings, sino que quiero mostrar
      ratings filtrando por álbum; esa pantalla solo la quiero mostrar
-     en 'album-detail'.
-    */
+     en 'album-detail'. */
     @GetMapping("ratings/filter-by-album/{id}")
     public List<Rating> findAllByAlbumId(@PathVariable Long id){
-        return this.ratingRepository.findByAlbum_Id(id);
+        return this.ratingRepository.findByAlbum_IdOrderByIdDesc(id);
     }
 }

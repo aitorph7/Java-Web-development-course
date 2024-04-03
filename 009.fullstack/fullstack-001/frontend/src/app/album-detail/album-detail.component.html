@@ -16,26 +16,44 @@
         <ul class="list-unstyled">
           @for (rating of ratings; track rating.id) {
             <li>
-              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+              <span class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top">
                 <img src="https://placehold.co/100"><!-- Esta imagen en el futuro se reemplazará por el avatar del usuario. -->
                 <div class="col-lg-8">
                   <h6 class="mb-0">
-                    <ngb-rating [(rate)]="rating.score">
+                    <ngb-rating [(rate)]="rating.score" [max]="5" [readonly]="true">
                       <ng-template let-fill="fill" let-index="index">
-                        <i class="bi-star{{ fill === 100 ? '-fill' : '' }} fs-3"></i>
+                        <i class="bi-star{{ fill === 100 ? '-fill' : '' }} fs-3" style="color:#7552cc;"></i>
                       </ng-template>
                     </ngb-rating>
                   </h6>
                   <small class="text-body-secondary">{{rating.comment}}</small>
                 </div>
-              </a>
+              </span>
             </li>
           }
         </ul>
     </div>
     <div class="col">
       <!-- Formulario de 2 campos para agregar nuevas ratings. -->
-      <h3>Add your rating!</h3>
+      <h3>Send your rating!</h3>
+
+      <form [formGroup]="ratingForm" (ngSubmit)="save()">
+
+        <ngb-rating [max]="5" formControlName="score">
+          <ng-template let-fill="fill" let-index="index">
+            <i class="bi-star{{ fill === 100 ? '-fill' : '' }} fs-3" style="color:#7552cc;"></i>
+          </ng-template>
+        </ngb-rating>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control" 
+          placeholder="Leave a comment here" id="comment" formControlName="comment" style="min-height: 120px;"></textarea>
+          <label for="bio">Leave a comment</label>
+        </div>
+
+        <button class="w-50 btn btn-success mb-5 mt-5" type="submit">Submit</button>
+      
+      </form>
     </div>
   </div>
 </div>

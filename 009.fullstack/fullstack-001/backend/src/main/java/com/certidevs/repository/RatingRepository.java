@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
-    List<Rating> findByAlbum_Id(Long id);
+    List<Rating> findByAlbum_IdOrderByIdDesc(Long id);
 
 }
