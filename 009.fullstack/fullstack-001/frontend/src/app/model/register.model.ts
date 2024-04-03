@@ -1,6 +1,6 @@
 export interface Register{
   email: string;
-  phone: string;
+  //phone: string;
   password: string;
   passwordConfirm: string;
 }

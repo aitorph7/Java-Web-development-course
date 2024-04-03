@@ -17,7 +17,7 @@ export class RegisterComponent {
   */
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
+    // phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
     passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
   },
@@ -42,13 +42,17 @@ export class RegisterComponent {
   save(){
     const register: Register = {
       email: this.registerForm.get('email')?.value ?? '',
-      phone: this.registerForm.get('phone')?.value ?? '',
+      //phone: this.registerForm.get('phone')?.value ?? '',
       password: this.registerForm.get('password')?.value ?? '',
       passwordConfirm: ''
     }
-    console.log(register);
-    // Limpiar el formulario (o redirigir al login/home) tras enviar el registro al backend.
-    this.registerForm.reset();
+    
+    this.httpClient.post('http://localhost:8080/users/register', register)
+    .subscribe((response: any) => {
+      // Limpiar el formulario (o redirigir al login/home) tras enviar el registro al backend.
+      this.registerForm.reset();
+    });
+
     
   }
 }

@@ -13,13 +13,13 @@
             <small class="text-danger">Email required.</small>
           } 
           @if (registerForm.controls.email.errors['email']) {
-            <small class="text-danger">Invalid email format.</small>
+            <small class="text-danger">Incorrect email format.</small>
           }
         </div>
       }
     </div>
 
-    <div class="form-floating">
+    <!-- <div class="form-floating">
       <input type="number" class="form-control" id="phone" placeholder="001234567" formControlName="phone">
       <label for="phone">Phone number</label>
       @if (registerForm.controls.phone.touched && registerForm.controls.phone.errors) {
@@ -32,7 +32,7 @@
           }
         </div>
       }
-    </div>
+    </div> -->
 
     <div class="form-floating">
       <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
