@@ -28,4 +28,10 @@ export class AuthenticationService {
     localStorage.setItem("jwt_token", token);
     this.isLoggedIn.next(true);
   }
+
+  // Para lograr un logout debo borrar el token:
+  removeToken(){
+    localStorage.removeItem("jwt_token");
+    this.isLoggedIn.next(false);
+  }
 }

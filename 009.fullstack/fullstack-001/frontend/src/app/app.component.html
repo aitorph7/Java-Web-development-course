@@ -1,16 +1,16 @@
 
-<button class="btn btn-primary" routerLink="/albums">Albums</button>
-<button class="btn btn-secondary" routerLink="/albums/create">Create Album</button>
+<button class="btn btn-primary me-2" routerLink="/albums">Albums</button>
+<button class="btn btn-secondary me-2" routerLink="/albums/create">Create Album</button>
 
-<button class="btn btn-info" routerLink="/artists">Artists</button>
-<button class="btn btn-warning" routerLink="/artists/create">Create Artist</button>
+<button class="btn btn-info me-2" routerLink="/artists">Artists</button>
+<button class="btn btn-warning me-2" routerLink="/artists/create">Create Artist</button>
 
 
 @if (isLoggedIn) {
-  <button class="btn btn-warning">Logout</button>
+  <button class="btn btn-warning me-2" (click)="logout()">Logout<i class="bi bi-box-arrow-right ms-2"></i></button>
 } @else {
-  <button class="btn btn-primary" routerLink="/login">Login</button>
-  <button class="btn btn-secondary" routerLink="/register">Register</button>
+  <button class="btn btn-primary me-2" routerLink="/login">Login<i class="bi bi-box-arrow-in-right ms-2"></i></button>
+  <button class="btn btn-secondary me-2" routerLink="/register">Register<i class="bi bi-person-add ms-2"></i></button>
 }
 
 
