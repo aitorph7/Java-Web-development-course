@@ -23,6 +23,7 @@ export class AuthenticationService {
  // para que los componentes lo 'escuchen'.
   isLoggedIn = new BehaviorSubject<boolean>(this.existsToken());
   userEmail = new BehaviorSubject<string>(this.getUserEmail());
+  isAdmin = new BehaviorSubject<boolean>(this.getIsAdmin());
 
   constructor() { }
 
@@ -35,6 +36,7 @@ export class AuthenticationService {
     localStorage.setItem("jwt_token", token);
     this.isLoggedIn.next(true);
     this.userEmail.next(this.getUserEmail());
+    this.isAdmin.next(this.getIsAdmin());
   }
 
   // Para lograr un logout debo borrar el token:
@@ -42,13 +44,21 @@ export class AuthenticationService {
     localStorage.removeItem("jwt_token");
     this.isLoggedIn.next(false);
     this.userEmail.next('');
+    this.isAdmin.next(false);
   }
 
   getUserEmail(){
     const token = localStorage.getItem("jwt_token");
     if(!token) return '';
     // si existe token lo decodificará y extraerá su email:
-    const decodedToken =  jwtDecode(token) as DecodedToken;
+    const decodedToken = jwtDecode(token) as DecodedToken;
     return decodedToken.email;
+  }
+
+  getIsAdmin(){ // true si role === admin o false en cualquier otro caso:
+    const token = localStorage.getItem("jwt_token");
+    if(!token) return false;
+    const decodedToken = jwtDecode(token) as DecodedToken;
+    return decodedToken.role === 'admin'; // true or false (comparación booleana)
   }
 }

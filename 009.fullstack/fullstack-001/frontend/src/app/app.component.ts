@@ -14,6 +14,7 @@ export class AppComponent {
   isLoggedIn = false; // Me suscribo a isLoggedIn porque aquí es donde tengo...
   // alojada la Navbar ahora mismo.
   userEmail = '';
+  isAdmin = false;
 
   constructor(
     private authService: AuthenticationService, 
@@ -21,6 +22,7 @@ export class AppComponent {
     ) {
     this.authService.isLoggedIn.subscribe((isLoggedIn: any) => this.isLoggedIn = isLoggedIn);
     this.authService.userEmail.subscribe((userEmail: any) => this.userEmail = userEmail);
+    this.authService.isAdmin.subscribe((isAdmin: any) => this.isAdmin = isAdmin);
   }
 
   logout(){
