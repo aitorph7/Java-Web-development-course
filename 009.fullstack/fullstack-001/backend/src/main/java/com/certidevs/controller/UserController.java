@@ -74,6 +74,7 @@ public class UserController {
                 .expiration(expirationDate)
                 // información personalizada: rol, username, email...
                 .claim("role", "admin")
+                .claim("email", user.getEmail())
                 // construye el token:
                 .compact();
         return new Token(token);
