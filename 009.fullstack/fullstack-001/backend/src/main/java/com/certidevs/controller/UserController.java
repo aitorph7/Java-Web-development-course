@@ -48,13 +48,15 @@ public class UserController {
         // recuperar usuario
         User user = this.userRepository.findByEmail(login.email()).orElseThrow();
         // comparar contraseñas
-        if (user.getPassword().equals(login.password())){
+        // TODO cuando la contraseña esté cifrada cambiar el proceso de comparación.
+        if (!user.getPassword().equals(login.password())){
             throw new RuntimeException("Incorrect password");
         }
         /*
+         TODO Lo ideal sería trasladar este proceso a un Servicio.
          JWT Json Web Token: jwt.io
-         Generar TOKEN de acceso importando una librería
-         Generar el token: https://github.com/...
+         Generar TOKEN de acceso: eyJhbGciOiJIUzI1NiIsIn......
+         Generar el token: https://github.com/jwtk/jjwt?tab=readme-ov-file#creating-a-jwt
         */
         Date issuedDate = new Date();
         long nextWeekMillis = TimeUnit.DAYS.toMillis(7);
@@ -75,5 +77,7 @@ public class UserController {
                 // construye el token:
                 .compact();
         return new Token(token);
+        // TODO necesitaré validar los tokens y que estén firmados con esta misma clave cuando lleguen del frontend
+        //  en las siguientes peticiones.
     }
 }
