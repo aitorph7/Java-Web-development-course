@@ -55,10 +55,10 @@ export class AuthenticationService {
     return decodedToken.email;
   }
 
-  getIsAdmin(){ // true si role === admin o false en cualquier otro caso:
+  getIsAdmin(){ // true si role === ADMIN o false en cualquier otro caso:
     const token = localStorage.getItem("jwt_token");
     if(!token) return false;
     const decodedToken = jwtDecode(token) as DecodedToken;
-    return decodedToken.role === 'admin'; // true or false (comparación booleana)
+    return decodedToken.role === 'ADMIN'; // true or false (comparación booleana)
   }
 }

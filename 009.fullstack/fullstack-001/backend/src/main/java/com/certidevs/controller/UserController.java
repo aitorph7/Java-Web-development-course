@@ -3,6 +3,7 @@ package com.certidevs.controller;
 import com.certidevs.dto.Login;
 import com.certidevs.dto.Register;
 import com.certidevs.dto.Token;
+import com.certidevs.model.Role;
 import com.certidevs.model.User;
 import com.certidevs.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
@@ -34,7 +35,7 @@ public class UserController {
         }
         // Crear el objeto User
         // TODO cifrar la contraseña con BCrypt
-        User user = new User(null, null, register.email(), register.password());
+        User user = new User(null, null, register.email(), register.password(), Role.USER);
         // Guardar el objeto User
         this.userRepository.save(user);
     }
@@ -73,7 +74,7 @@ public class UserController {
                 // fecha de expiración del token:
                 .expiration(expirationDate)
                 // información personalizada: rol, username, email...
-                .claim("role", "admin")
+                .claim("role", user.getRole())
                 .claim("email", user.getEmail())
                 // construye el token:
                 .compact();

@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-album-list',
@@ -18,8 +19,13 @@ import { DatePipe } from '@angular/common';
 })
 export class AlbumListComponent implements OnInit{
   albums: Album[] = [];
+  isAdmin = false;
   
-  constructor(private httpClient: HttpClient) {};
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthenticationService) {
+      this.authService.isAdmin.subscribe((isAdmin: any) => this.isAdmin = isAdmin);  
+    };
 
   ngOnInit(): void {
     this.loadAlbums();/* Trae una lista de usuarios del backend ejecutando 
