@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { ArtistFormComponent } from './artist-form/artist-form.component';
+import { userRoleGuard } from './authentication/user-role.guard';
 
 export const routes: Routes = [
   {
@@ -32,11 +33,13 @@ export const routes: Routes = [
   },
   {
     path: 'albums/create',
-    component: AlbumFormComponent
+    component: AlbumFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'albums/:id/update',
-    component: AlbumFormComponent
+    component: AlbumFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'albums/:id/reserve',

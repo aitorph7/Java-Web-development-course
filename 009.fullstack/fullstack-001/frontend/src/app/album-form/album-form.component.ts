@@ -9,7 +9,7 @@ import { RecordCompany } from '../model/recordCompany.model';
 @Component({
   selector: 'app-album-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './album-form.component.html',
   styleUrl: './album-form.component.css'
 })

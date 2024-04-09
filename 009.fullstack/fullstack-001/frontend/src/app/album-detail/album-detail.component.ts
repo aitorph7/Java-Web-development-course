@@ -9,7 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-album-detail',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, NgbRatingModule, ReactiveFormsModule],
+  imports: [RouterLink, NgbRatingModule, ReactiveFormsModule],
   templateUrl: './album-detail.component.html',
   styleUrl: './album-detail.component.css'
 })

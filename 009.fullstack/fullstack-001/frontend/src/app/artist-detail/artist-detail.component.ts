@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-artist-detail',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe],
   templateUrl: './artist-detail.component.html',
   styleUrl: './artist-detail.component.css'
 })

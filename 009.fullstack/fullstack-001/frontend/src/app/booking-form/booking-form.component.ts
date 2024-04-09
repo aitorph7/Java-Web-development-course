@@ -10,7 +10,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-booking-form',
   standalone: true,
-  imports: [HttpClientModule, ReactiveFormsModule, CurrencyPipe, NgbAlertModule, RouterLink],
+  imports: [ReactiveFormsModule, CurrencyPipe, NgbAlertModule, RouterLink],
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.css'
 })

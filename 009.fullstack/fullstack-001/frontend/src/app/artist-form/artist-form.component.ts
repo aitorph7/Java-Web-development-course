@@ -7,7 +7,7 @@ import { Artist } from '../model/artist.model';
 @Component({
   selector: 'app-artist-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './artist-form.component.html',
   styleUrl: './artist-form.component.css'
 })

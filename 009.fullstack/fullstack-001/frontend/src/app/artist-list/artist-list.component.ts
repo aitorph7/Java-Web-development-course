@@ -6,7 +6,7 @@ import { Artist } from '../model/artist.model';
 @Component({
   selector: 'app-artist-list',
   standalone: true,
-  imports: [HttpClientModule, RouterLink],
+  imports: [RouterLink],
   templateUrl: './artist-list.component.html',
   styleUrl: './artist-list.component.css'
 })
