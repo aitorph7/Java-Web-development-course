@@ -39,7 +39,7 @@ export const routes: Routes = [
   {
     path: 'albums/create',
     component: AlbumFormComponent,
-    canActivate: [userRoleGuard]
+    //canActivate: [userRoleGuard]
   },
   {
     path: 'albums/:id/update',
