@@ -1,6 +1,6 @@
 package com.certidevs.security;
 
-// clase para:
+// Clase para:
 // 1. filtrar las peticiones HTTP entrantes,
 // 2. extraer el token JWT de las cabeceras,
 // 3. verificar que el token es correcto y
@@ -22,7 +22,6 @@ import java.util.Base64;
 
 @Component
 @Slf4j
-
 public class RequestJWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

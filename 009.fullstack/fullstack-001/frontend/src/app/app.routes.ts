@@ -8,7 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { ArtistFormComponent } from './artist-form/artist-form.component';
-import { userRoleGuard } from './authentication/user-role.guard';
+import { userRoleGuard } from './authentication/user-role.guard'; 
+/*
+'Guard' para proteger rutas.
+comando: "ng generate guard authentication/user-role"
+'/authentication/...' para que cree los archivos en esa carpeta que ya había creado.
+*/
 
 export const routes: Routes = [
   {

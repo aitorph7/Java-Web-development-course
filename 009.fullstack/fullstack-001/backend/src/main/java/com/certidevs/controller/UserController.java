@@ -57,7 +57,7 @@ public class UserController {
          TODO Lo ideal sería trasladar este proceso a un Servicio.
          JWT Json Web Token: jwt.io
          Generar TOKEN de acceso: eyJhbGciOiJIUzI1NiIsIn......
-         Generar el token: https://github.com/jwtk/jjwt?tab=readme-ov-file#creating-a-jwt
+         Tutorial para generar un token: https://github.com/jwtk/jjwt?tab=readme-ov-file#creating-a-jwt
         */
         Date issuedDate = new Date();
         long nextWeekMillis = TimeUnit.DAYS.toMillis(7);
