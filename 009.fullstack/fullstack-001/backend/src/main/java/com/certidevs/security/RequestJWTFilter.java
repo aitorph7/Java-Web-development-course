@@ -82,8 +82,7 @@ public class RequestJWTFilter extends OncePerRequestFilter {
         User user = userOptional.get();
         log.info("Rol del usuario {}", user.getRole().toString());
         SimpleGrantedAuthority role = new SimpleGrantedAuthority(user.getRole().toString());
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                user, null, List.of(role));
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, List.of(role));
         // guardar el usuario en una memoria de Spring:
         SecurityContextHolder.getContext().setAuthentication(auth); // permite que en otras partes de la aplicación puedas...
         // ... obtener la autenticación así: SecurityContextHolder.getContext().getAuthentication(auth);
