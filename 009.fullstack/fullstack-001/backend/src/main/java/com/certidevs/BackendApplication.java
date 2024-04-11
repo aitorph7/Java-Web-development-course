@@ -19,6 +19,10 @@ public class BackendApplication {
 		NO insertarlos directamente desde MySQL Workbench de forma manual, para evitar
 		que Hibernate no los detecte.
 
+		EN PRODUCCIÓN NO SE INSERTARÍAN DATOS ASÍ NI SE BORRARÍAN LOS DATOS ACTUALES.
+		En producción se suele utilizar un framework de control de versiones sobre la BD
+		como 'Liquibase' o 'Flyway'.
+		
 		Todos estos datos en un futuro los reemplazaré con datos creados en un archivo
 		DATA.SQL; algo bastante habitual en este tipo de aplicaciones, que sea un script
 		de SQL quien inserte los datos.
