@@ -5,6 +5,7 @@ import com.certidevs.repository.AlbumRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class AlbumController {
     @GetMapping("albums")
     public List<Album> findAll(){
         log.info("REST request to findAll albums");
+        //SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // Object --> User. Crear clase SecurityUtils
         return this.albumRepository.findAll();
     }
     @GetMapping("albums/{id}")

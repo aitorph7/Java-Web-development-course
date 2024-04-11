@@ -32,9 +32,9 @@ public class SecurityConfig {
                 .requestMatchers("users/login").permitAll()
                 .requestMatchers("users/register").permitAll()
                 .requestMatchers("albums").permitAll() // permito ver álbumes por ser como la Home de mi aplicación.
-                .requestMatchers(HttpMethod.POST, "albums").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "albums").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "albums").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.POST, "albums").hasAnyAuthority("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "albums").hasAnyAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "albums").hasAnyAuthority("ADMIN")
                 // lo que no sea 'login' o 'register' es obligatorio estar autenticado:
                 .anyRequest()
                 .authenticated();
