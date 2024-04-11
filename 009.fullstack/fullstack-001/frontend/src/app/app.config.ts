@@ -8,7 +8,7 @@ import { jwtInterceptor } from './authentication/jwt.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    // configuracón de HttpClient con interceptor JWT:
+    // configuracón GLOBAL de HttpClient con interceptor JWT:
     // (ya no hace falta import de 'HttpClientModule' en los componentes.)
     provideHttpClient(withInterceptors([jwtInterceptor]))
   

@@ -30,7 +30,7 @@ export class AuthenticationService {
   existsToken(){
     return localStorage.getItem("jwt_token") !== null; // true or false.
     // TODO: revisar si el token no ha expirado.
-  };
+  }
 
   saveToken(token: string){
     localStorage.setItem("jwt_token", token);
@@ -41,14 +41,14 @@ export class AuthenticationService {
 
   // Para lograr un logout debo borrar el token:
   removeToken(){
-    localStorage.removeItem("jwt_token");
+    localStorage.removeItem('jwt_token');
     this.isLoggedIn.next(false);
     this.userEmail.next('');
     this.isAdmin.next(false);
   }
 
   getUserEmail(){
-    const token = localStorage.getItem("jwt_token");
+    const token = localStorage.getItem('jwt_token');
     if(!token) return '';
     // si existe token lo decodificará y extraerá su email:
     const decodedToken = jwtDecode(token) as DecodedToken;
@@ -56,7 +56,7 @@ export class AuthenticationService {
   }
 
   getIsAdmin(){ // true si role === ADMIN o false en cualquier otro caso:
-    const token = localStorage.getItem("jwt_token");
+    const token = localStorage.getItem('jwt_token');
     if(!token) return false;
     const decodedToken = jwtDecode(token) as DecodedToken;
     return decodedToken.role === 'ADMIN'; // true or false (comparación booleana)

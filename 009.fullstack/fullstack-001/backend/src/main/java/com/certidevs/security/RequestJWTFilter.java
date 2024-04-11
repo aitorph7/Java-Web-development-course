@@ -71,7 +71,7 @@ public class RequestJWTFilter extends OncePerRequestFilter {
         // 3. Obtener el usuario de BD cuyo Id he extraído del token JWT:
         Optional<User> userOptional = this.userRepository.findById(Long.valueOf(userId)); // el String devuelto me lo ha parseado a Long
         if (userOptional.isEmpty()) {
-            // no hay usuario (sería un caso raro) deviuelvo un error Unauthorized 401
+            // no hay usuario (sería un caso raro) devuelvo un error 'Unauthorized 401'
             log.warn("Usuario con Id {} no encontrado", userId);
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
@@ -90,9 +90,5 @@ public class RequestJWTFilter extends OncePerRequestFilter {
 
         // dejar pasar a la petición para que continúe
         filterChain.doFilter(request, response);
-
-
-
-
     }
 }
