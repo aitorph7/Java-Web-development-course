@@ -3,7 +3,6 @@ package com.certidevs.security;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -43,9 +42,6 @@ public class SecurityConfig {
                 .requestMatchers("users/login").permitAll()
                 .requestMatchers("users/register").permitAll()
                 .requestMatchers("albums").permitAll() // permito ver álbumes por ser como la Home de mi aplicación.
-                .requestMatchers(HttpMethod.POST, "albums").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "albums").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "albums").hasAuthority("ADMIN")
                 // .requestMatchers("albums").hasAnyAuthority("ADMIN")
                 // lo que no sea 'login' o 'register' es obligatorio estar autenticado:
                 .anyRequest()
