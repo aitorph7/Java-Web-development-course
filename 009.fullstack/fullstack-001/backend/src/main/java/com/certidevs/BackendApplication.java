@@ -32,11 +32,13 @@ public class BackendApplication {
 		RecordCompanyRepository recordCompanyRepository = context.getBean(RecordCompanyRepository.class);
 		RatingRepository ratingRepository = context.getBean(RatingRepository.class);
 		UserRepository userRepository = context.getBean(UserRepository.class);
+		BookingRepository bookingRepository = context.getBean(BookingRepository.class);
 
 		/*
 		1º borro los álbumes porque tienen asociaciones hacia artistas y discográficas.
 		Si borro 1º un artista o disquera dará error al haber álbumes apuntando a ellos.
 		*/
+		bookingRepository.deleteAll();
 		ratingRepository.deleteAll();
 		albumRepository.deleteAll(); // Borro los datos que haya para que se generen nuevos datos.
 		recordCompanyRepository.deleteAll();
