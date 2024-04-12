@@ -1,7 +1,9 @@
 package com.certidevs.controller;
 
 import com.certidevs.model.Album;
+import com.certidevs.model.User;
 import com.certidevs.repository.AlbumRepository;
+import com.certidevs.security.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,8 @@ public class AlbumController {
     @GetMapping("albums")
     public List<Album> findAll(){
         log.info("REST request to findAll albums");
-        //SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // Object --> User. Crear clase SecurityUtils
+        SecurityUtils.getAuthUser().ifPresent(System.out::println); // imprime por consola el usuario con un método...
+        // ... referenciado de Java; es como un 'if()' pero en 1 sola línea.
         return this.albumRepository.findAll();
     }
     @GetMapping("albums/{id}")

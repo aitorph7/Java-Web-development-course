@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+@ToString // para que lo imprima por consola
 public class User {
 
     @Id
