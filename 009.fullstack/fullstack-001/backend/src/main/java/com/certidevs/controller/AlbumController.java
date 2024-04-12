@@ -26,7 +26,14 @@ public class AlbumController {
     public List<Album> findAll(){
         log.info("REST request to findAll albums");
         SecurityUtils.getAuthUser().ifPresent(System.out::println); // imprime por consola el usuario con un método...
-        // ... referenciado de Java; es como un 'if()' pero en 1 sola línea.
+        // ... referenciado de Java; PROGRAMACIÓN FUNCIONAL: es como un 'if()' de 4 líneas de código:
+                    // Optional<User> userOptional = SecurityUtils.getAuthUser();
+                    // if (userOptional.isPresent()){
+                    // |     User user = userOptional.get();
+                    // |     System.out.println(user);
+                    // }
+        // ... pero en 1 sola línea.
+        // Cada vez que vaya a trabajar con un 'Optional' en su lugar puedo usar un '.ifPresent'
         return this.albumRepository.findAll();
     }
     @GetMapping("albums/{id}")
