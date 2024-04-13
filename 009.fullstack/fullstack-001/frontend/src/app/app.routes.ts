@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { ArtistFormComponent } from './artist-form/artist-form.component';
 import { userRoleGuard } from './authentication/user-role.guard'; 
+import { AccountFormComponent } from './account-form/account-form.component';
 /*
 'Guard' para proteger rutas.
 comando: "ng generate guard authentication/user-role"
@@ -65,5 +66,9 @@ export const routes: Routes = [
   {
     path: 'artists/:id/update',
     component: ArtistFormComponent
+  },
+  {
+    path: 'users/account',
+    component: AccountFormComponent
   }
 ];

@@ -6,18 +6,17 @@ import com.certidevs.dto.Token;
 import com.certidevs.model.Role;
 import com.certidevs.model.User;
 import com.certidevs.repository.UserRepository;
+import com.certidevs.security.SecurityUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @CrossOrigin("*")
@@ -81,5 +80,26 @@ public class UserController {
         return new Token(token);
         // TODO necesitaré validar los tokens y que estén firmados con esta misma clave cuando lleguen del frontend
         //  en las siguientes peticiones.
+    }
+
+    // Get account: para obtener en el frontend los datos del usuario
+    @GetMapping("users/account")
+    public User getCurrentUser(){
+        return SecurityUtils.getAuthUser().orElseThrow();
+    }
+
+    // Put account: para actualizar los datos del usuario
+    @PutMapping("users/account")
+    public User update(@RequestBody User user){
+        // Si está autenticado y es ADMIN o es el mismo usuario que la variable 'user' permito
+        // actualizar, en caso contrario no lo permito.
+        SecurityUtils.getAuthUser().ifPresent(currentUser -> {
+            if (currentUser.getRole() == Role.ADMIN || Objects.equals(currentUser.getId(), user.getId())){
+                this.userRepository.save(user);
+            } else {
+                throw new RuntimeException("No tiene permiso para actualizar"); // TODO reemplazar por excepción personalizada
+            }
+        });
+        return user;
     }
 }

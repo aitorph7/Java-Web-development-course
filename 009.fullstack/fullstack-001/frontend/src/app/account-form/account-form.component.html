@@ -1,0 +1,21 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <h1 class="my-5">My profile</h1>
+
+      <form [formGroup]="userForm" (ngSubmit)="save()">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <label for="name">Name</label>
+        </div>
+
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="submit">Update</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
