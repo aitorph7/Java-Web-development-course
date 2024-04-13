@@ -34,7 +34,12 @@ public class UserController {
         }
         // Crear el objeto User
         // TODO cifrar la contraseña con BCrypt
-        User user = new User(null, null, register.email(), register.password(), Role.USER);
+        User user = User.builder()
+                .email(register.email())
+                .password(register.password())
+                .role(Role.USER)
+                .build();
+
         // Guardar el objeto User
         this.userRepository.save(user);
     }

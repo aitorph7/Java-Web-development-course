@@ -14,7 +14,9 @@ export class AccountFormComponent implements OnInit{
 
   user: User | undefined;
   userForm = new FormGroup({
-    name: new FormControl()
+    name: new FormControl(),
+    lastName: new FormControl(),
+    street: new FormControl()
   });
 
   constructor(private httpClient: HttpClient){}
@@ -32,6 +34,8 @@ export class AccountFormComponent implements OnInit{
       return;
     }
     this.user.name = this.userForm.get('name')?.value;
+    this.user.lastName = this.userForm.get('lastName')?.value;
+    this.user.street = this.userForm.get('street')?.value;
     this.httpClient.put<User>('http://localhost:8080/users/account', this.user)
     .subscribe((user: any) => this.user = user);
   }
