@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      
+      <h1 class="my-5">Enter user avatar</h1>
+
+      <form>
+
+        <!-- El siguiente div llamará a un método (onFileChange) que aún no existe (hay que crearlo) utilizando el evento 'change'-->
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="photo" (change)="onFileChange($event)">
+          <!-- $event es un objeto que crea JS y en el que viajan los datos del archivo.
+              El símbolo $ sirve para distinguirlo de otras variables presentes, como artistForm. -->
+          <button class="btn btn-outline-secondary" type="button" id="photoBtn">Upload</button>
+        </div>
+
+        <button class="w-100 btn btn-primary btn-lg mb-5 mt-5" type="button" (click)="save()">Upload avatar</button>
+
+      </form>
+
+    </div>
+    <div class="col-lg-4">
+
+      @if (photoPreview) {
+        <h2 class="my-5">New uploading avatar</h2>
+        <img class="img-fluid" [src]="photoPreview">
+      }
+      @if (!photoPreview && user?.photoUrl) {
+        <h2 class="my-5">Avatar preview</h2>
+        <img class="img-fluid" [src]="'http://localhost:8080/files/' + user?.photoUrl">
+      }
+
+    </div>
+  </div>
+</div>

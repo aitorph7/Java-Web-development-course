@@ -7,11 +7,13 @@ import com.certidevs.model.Role;
 import com.certidevs.model.User;
 import com.certidevs.repository.UserRepository;
 import com.certidevs.security.SecurityUtils;
+import com.certidevs.service.FileService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 import java.util.Date;
@@ -26,6 +28,8 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final FileService fileService;
+
     @PostMapping("users/register")
     public void register(@RequestBody Register register){
         // si el email está ocupado no registro al usuario
@@ -106,5 +110,20 @@ public class UserController {
             }
         });
         return user;
+    }
+
+    // Subir avatar
+    @PostMapping("users/account/avatar")
+    public User uploadAvatar(
+            @RequestParam(value = "photo") MultipartFile file
+    ){
+        User user = SecurityUtils.getAuthUser().orElseThrow();
+        // si hay archivo, le guardo ese archivo y devuelvo el user con el 'return' de +abajo
+        if (file != null && !file.isEmpty()){
+            String filename = fileService.store(file);
+            user.setPhotoUrl(filename);
+            this.userRepository.save(user);
+        }
+        return user; // si no hay archivo devuelvo el user tal cual lo tengo
     }
 }

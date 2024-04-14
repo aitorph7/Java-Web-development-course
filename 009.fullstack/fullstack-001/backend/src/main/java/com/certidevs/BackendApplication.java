@@ -45,7 +45,7 @@ public class BackendApplication {
 		artistRepository.deleteAll();
 		userRepository.deleteAll();
 
-		Artist artist1 = new Artist(null, "Mike Oldfield", "England", false, LocalDate.of(1967, 1, 1), "https://cdn.galleries.smcloud.net/t/galleries/gf-7DRQ-y1Y3-nHpu_mike-oldfield-swietuje-50-lecie-tubular-bells-994x828.jpg", "Texto largo de leer");
+		Artist artist1 = new Artist(null, "Mike Oldfield", "England", false, LocalDate.of(1967, 1, 1), "mike_oldfield.png", "Texto largo de leer");
 		Artist artist2 = new Artist(null, "Simple Minds", "Scotland", true, LocalDate.of(1977, 1,1),"https://i.guim.co.uk/img/media/b37b81eafad5508816f3a6fcf9acd8594a4d411a/0_496_7543_4526/master/7543.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=1f2460f92ab0d54f51c91fe79a45e899", "Texto largo de leer");
 		Artist artist3 = new Artist(null, "Roy Orbison", "USA", false, LocalDate.of(1953, 1, 1),"https://placehold.co/400", "Texto largo de leer");
 		Artist artist4 = new Artist(null, "Alice in Chains", "USA", true, LocalDate.of(1987, 1, 1),"https://www.musicmaniarecords.be/media/artist-photo/139572-alice-in-chains-band-pic.jpg", "Texto largo de leer");

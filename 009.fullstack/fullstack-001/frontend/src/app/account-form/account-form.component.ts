@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-account-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './account-form.component.html',
   styleUrl: './account-form.component.css'
 })

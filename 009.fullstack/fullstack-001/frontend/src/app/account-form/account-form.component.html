@@ -3,7 +3,9 @@
   <div class="row">
     <div class="col-12">
 
-      <h1 class="my-5">My profile</h1>
+      <h1 class="my-5">My profile
+        <button class="btn btn-success" routerLink="avatar">Change avatar</button>
+      </h1>
 
       <form [formGroup]="userForm" (ngSubmit)="save()">
 
