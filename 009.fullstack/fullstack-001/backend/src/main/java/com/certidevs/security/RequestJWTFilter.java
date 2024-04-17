@@ -47,16 +47,16 @@ public class RequestJWTFilter extends OncePerRequestFilter {
         // 1. Extraer de la cabecera Authorization de la request.
 
         String bearerToken = request.getHeader("Authorization");
-        String token = "";
-        if (StringUtils.hasLength(bearerToken) && bearerToken.startsWith("Bearer")) {
-            token = bearerToken.substring("Bearer ".length());
-        } else {
+        if (!StringUtils.hasLength(bearerToken) || !bearerToken.startsWith("Bearer")){
             filterChain.doFilter(request, response);
-            return; // si no hay token.
+            return;
         }
-        log.info("Extraído token JWT {}", token);
+        String token = bearerToken.substring("Bearer ".length());
 
         // 2. Verificar el token JWT:
+        // TODO almacenar clave en variable de entorno
+        // Long userId = verifyTokenAndExtractUserId(token);
+
         byte[] key = Base64.getDecoder().decode("PwUAIxpZLYjsyjzi62bY4or99ZLFISl7y47RWBmm+bs=");
 
         String userId = Jwts.parser()
