@@ -31,12 +31,11 @@ export class LoginComponent {
       email: this.loginForm.get('email')?.value ?? '',
       password: this.loginForm.get('password')?.value ?? '',
     }
-    console.log(login);
+    
     const url = 'http://localhost:8080/users/login';
     // método que envía los datos del login al backend, donde entra un
     // 'login' y sale un 'token':
     this.httpClient.post<Token>(url, login).subscribe((response: any) => {
-      console.log(response.token);
       this.authService.saveToken(response.token);
       this.router.navigate(['/albums']);
     });

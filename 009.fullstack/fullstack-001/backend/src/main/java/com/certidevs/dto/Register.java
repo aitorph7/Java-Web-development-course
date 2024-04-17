@@ -6,3 +6,5 @@ public record Register(
         String password
 ) {
 }
+// esto es lo que se requiere para crear una cuenta, pero
+// podría recibir más datos.

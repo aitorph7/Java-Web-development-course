@@ -5,6 +5,7 @@ import com.certidevs.repository.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -75,8 +76,9 @@ public class BackendApplication {
 		ratingRepository.saveAll(List.of(r1, r2, r3));
 
 		// creo usuarios valiéndome del @Builder de Lombok inyectado solo en 'User.java':
-		User u1 = User.builder().email("admin@gmail.com").name("admin1").password("admin1234").role(Role.ADMIN).build();
-		User u2 = User.builder().email("user@gmail.com").name("user1").password("user1234").role(Role.USER).build();
+		PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
+		User u1 = User.builder().email("admin@gmail.com").name("admin1").password(passwordEncoder.encode("admin1234")).role(Role.ADMIN).build();
+		User u2 = User.builder().email("user@gmail.com").name("user1").password(passwordEncoder.encode("user1234")).role(Role.USER).build();
 		userRepository.saveAll(List.of(u1, u2));
 
 
