@@ -5,7 +5,7 @@ import { AuthenticationService } from './authentication.service';
 
 /*
 Guard funcional (basado en función): que sirve para comprobar si el usuario tiene el rol de ADMIN.
-Sirve para proteger las rutas; se añade sonre la ruta que quiero proteger en 'app.routes.ts'
+Sirve para proteger las rutas; se añade sobre la ruta que quiero proteger en 'app.routes.ts'
 
 Si es ADMIN devuelve true y puede pasar; en caso contrario hago router.navigate a /login.
 */

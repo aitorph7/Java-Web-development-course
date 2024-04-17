@@ -11,6 +11,7 @@ import { ArtistFormComponent } from './artist-form/artist-form.component';
 import { userRoleGuard } from './authentication/user-role.guard'; 
 import { AccountFormComponent } from './account-form/account-form.component';
 import { AvatarFormComponent } from './avatar-form/avatar-form.component';
+import { userLoggedInGuard } from './authentication/user-logged-in.guard';
 /*
 'Guard' para proteger rutas.
 comando: "ng generate guard authentication/user-role"
@@ -36,7 +37,8 @@ export const routes: Routes = [
   },
   {
     path: 'albums/:id/detail',
-    component: AlbumDetailComponent
+    component: AlbumDetailComponent,
+    canActivate: [userLoggedInGuard]
   },
   {
     path: 'albums/create',
@@ -50,7 +52,8 @@ export const routes: Routes = [
   },
   {
     path: 'albums/:id/reserve',
-    component: BookingFormComponent
+    component: BookingFormComponent,
+    canActivate: [userLoggedInGuard]
   },
   {
     path: 'artists/:id/detail',
@@ -62,11 +65,13 @@ export const routes: Routes = [
   },
   {
     path: 'artists/create',
-    component: ArtistFormComponent
+    component: ArtistFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'artists/:id/update',
-    component: ArtistFormComponent
+    component: ArtistFormComponent,
+    canActivate: [userRoleGuard]
   },
   {
     path: 'users/account',

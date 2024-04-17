@@ -21,6 +21,7 @@ export class ArtistFormComponent implements OnInit{
     estYear: new FormControl<Date>(new Date()),
     photoUrl: new FormControl(''),
     bio: new FormControl('')
+    // añadir aquí todos los campos de 'Artist'
   });
   photoFile: File | undefined;
   photoPreview: string | undefined;
@@ -77,6 +78,9 @@ export class ArtistFormComponent implements OnInit{
     if(this.photoFile){
       formData.append("photo", this.photoFile); // introducir el photoFile.
     }
+
+    // En caso de que 'artist' tenga asociaciones con  entidades, ejemplo: RecordCompany ->
+    // formData.append('recordCompany.id', this.artistForm.get('recordCompany')?.value.id)
     
     if(this.isUpdate){
         // httpClient post para enviar el formData al backend:

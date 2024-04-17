@@ -12,6 +12,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +30,7 @@ public class UserController {
 
     private final UserRepository userRepository;
     private final FileService fileService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("users/register")
     public void register(@RequestBody Register register){
@@ -37,10 +39,10 @@ public class UserController {
             throw new RuntimeException("Busy email");
         }
         // Crear el objeto User
-        // TODO cifrar la contraseña con BCrypt
+        // Cifrar la contraseña con BCrypt
         User user = User.builder()
                 .email(register.email())
-                .password(register.password())
+                .password(passwordEncoder.encode(register.password()))
                 .role(Role.USER)
                 .build();
 

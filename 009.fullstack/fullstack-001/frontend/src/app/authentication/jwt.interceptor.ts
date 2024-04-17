@@ -20,7 +20,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   if(token){
     req = req.clone({
       // agregar token JWT a la request:
-      headers: req.headers.set('Authorization', `Bearer ${token}`)
+      headers: req.headers.set('Authorization', `Bearer ${token}`)// <- acentos 'italianos' porque se inserta una variable.
     });
   }
   return next(req);
