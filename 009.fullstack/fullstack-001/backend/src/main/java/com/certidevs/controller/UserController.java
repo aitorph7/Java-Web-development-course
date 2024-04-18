@@ -12,6 +12,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,7 +64,7 @@ public class UserController {
         boolean correctPassword = passwordEncoder.matches(login.password(), user.getPassword());
         boolean incorrectPassword = !correctPassword;
         if (incorrectPassword){
-            throw new RuntimeException("Incorrect password");
+            throw new BadCredentialsException("Incorrect password");
         }
 //        if (!passwordEncoder.matches(login.password(), user.getPassword())){
 //            throw new RuntimeException("Incorrect password");

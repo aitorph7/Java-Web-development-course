@@ -1,12 +1,14 @@
 package com.certidevs.security;
 
+import com.certidevs.model.Role;
 import com.certidevs.model.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.swing.*;
 import java.util.Optional;
 
 public class SecurityUtils {
+
+    private SecurityUtils(){} // prohíbo crear objetos de la clase SecurityUtils.
 
     /** next method: devuelve el usuario autenticado extraído de Spring Security.
      * Se utilizará así:
@@ -21,5 +23,13 @@ public class SecurityUtils {
         } else {
             return Optional.empty();
         }
+    }
+
+    public static boolean isAdminAuthUser() {
+        if (getAuthUser().isEmpty()){
+            return false;
+        }
+        User user = getAuthUser().get();
+        return user.getRole().equals(Role.ADMIN);
     }
 }

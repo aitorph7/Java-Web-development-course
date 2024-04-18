@@ -36,7 +36,7 @@ export class AlbumDetailComponent implements OnInit{
       const url = 'http://localhost:8080/albums/' + id;
       this.httpClient.get<Album>(url).subscribe((alb: Album | undefined) => {
         this.album = alb;
-        console.log(this.album);
+        this.loadRatings();
       });
 
       /*
@@ -71,8 +71,21 @@ export class AlbumDetailComponent implements OnInit{
         // Reseteo el formulario para que quede vacío...
         this.ratingForm.reset();
         // y cargo de nuevo todos los ratings del álbum (copiando el código declarado más arriba)
-        this.httpClient.get<Rating[]>('http://localhost:8080/ratings/filter-by-album/' + this.album?.id)
-        .subscribe((ratings: any) => this.ratings = ratings);
+        this.loadRatings();
+    });
+  }
+
+  loadRatings(){
+    if (!this.album) return;
+    this.httpClient.get<Rating[]>('http://localhost:8080/ratings/filter-by-album/' + this.album?.id)
+    .subscribe((ratings: any) => this.ratings = ratings);
+  }
+
+  deleteRating(rating: Rating){
+    this.httpClient.delete('http://localhost:8080/ratings/' + rating.id)
+    .subscribe({
+      next: (response: any) => this.loadRatings(),
+      error: (error: any)  => console.log(error)
     });
   }
 }

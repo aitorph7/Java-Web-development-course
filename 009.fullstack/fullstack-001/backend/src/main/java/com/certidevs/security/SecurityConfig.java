@@ -25,12 +25,11 @@ public class SecurityConfig {
 
     // Voy a sobreescribir/personalizar la seguridad (el objeto HttpSecurity de Spring Security)
     // para usar mi filtro JWT y proteger controladores
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // le voy a decir qué rutas quiero proteger y cuáles quiero dejar abiertas.
 
-        // PARA LAS VERSIONES ANTERIORES A SPRING 6.1:
+        // PARA LAS VERSIONES ANTERIORES A SPRING SECURITY 6.1:
         // mi aplicación va a ser 'sin estados' (sin sesiones Http), ya que uso tokens JWT
         // La autenticación JWT es 'sin estado' y no depende de sesiones o cookies.
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -54,14 +53,19 @@ public class SecurityConfig {
 
         return http.build();
     }
-    // PARA LAS NUEVAS VERSIONES DE SPRING > 6.1:
-    //        http
-    //                .csrf(csrf -> csrf.disable())
-    //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-    //                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-    //                        .requestMatchers("/users/login").permitAll()
-    //                        .requestMatchers("/users/register").permitAll()
-    //                        .anyRequest().authenticated()
-    //                ).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-    //                .build();
+    /*
+     PARA LAS NUEVAS VERSIONES DE SPRING SECURITY >= 6.1:
+     @Bean
+     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+          return http
+             .csrf(csrf -> csrf.disable())
+             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+             .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+             .requestMatchers("/users/login").permitAll()
+             .requestMatchers("/users/register").permitAll()
+             .anyRequest().authenticated()
+             ).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+             .build();
+      }
+    */
 }

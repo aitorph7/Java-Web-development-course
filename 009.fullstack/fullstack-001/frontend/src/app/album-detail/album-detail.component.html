@@ -25,6 +25,12 @@
                         <i class="bi-star{{ fill === 100 ? '-fill' : '' }} fs-3" style="color:#7552cc;"></i>
                       </ng-template>
                     </ngb-rating>
+
+                    
+                      <i class="bi bi-x-circle-fill fs-3 ms-3 text-danger" style="cursor:pointer;" 
+                      (click)="deleteRating(rating)"></i>
+                    
+
                   </h6>
                   <small class="text-body-secondary">{{rating.comment}}</small>
                 </div>
