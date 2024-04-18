@@ -1,8 +1,11 @@
 package com.certidevs.controller;
 
+import com.certidevs.exception.ConflictDeleteException;
 import com.certidevs.model.Album;
 import com.certidevs.model.User;
 import com.certidevs.repository.AlbumRepository;
+import com.certidevs.repository.BookingRepository;
+import com.certidevs.repository.RatingRepository;
 import com.certidevs.security.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +24,8 @@ import java.util.Optional;
 public class AlbumController {
 
     private final AlbumRepository albumRepository;
+    private final RatingRepository ratingRepository; // lo necesito para eliminar los ratings asociados al album.
+    private final BookingRepository bookingRepository;
 
     @GetMapping("albums")
     public List<Album> findAll(){
@@ -67,8 +72,16 @@ public class AlbumController {
     }
     @DeleteMapping("albums/{id}")
     public void deleteById(@PathVariable Long id){
-        // Opción 1: borar el libro, pero antes desasociar o borrar
-        this.albumRepository.deleteById(id);
+        // Opción 1: borar el libro, pero antes desasociar o borrar aquellos objetos que apunten al album.
+        try{
+            this.ratingRepository.deleteByAlbumId(id);
+            this.bookingRepository.deleteByAlbumId(id);
+            this.albumRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error("Error deleting album", e);
+            throw new ConflictDeleteException("Unable to delete album");
+        }
+
 
 //        opción 2: desactivar/ archivar el album
 //        album = this.albumRepository.findById();

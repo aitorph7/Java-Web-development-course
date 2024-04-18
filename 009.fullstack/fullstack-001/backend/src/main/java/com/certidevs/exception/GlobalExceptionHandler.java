@@ -24,6 +24,14 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException exception){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage()); // Error 401
+    }
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<String> handleUnauthorizedException(UnauthorizedException exception){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage()); // Error 401
+    }
+    @ExceptionHandler(ConflictDeleteException.class)
+    public ResponseEntity<String> handleConflictDeleteException(ConflictDeleteException exception){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage()); // Error 409
     }
 }

@@ -11,7 +11,20 @@
   <div class="row">
     <div class="col">
       <!-- Listado de últimas valoraciones. -->
-      <h3>Ratings List</h3>
+      <h3 class="mb-2">Ratings List</h3>
+
+      @if (showSuccessDeletedRating) {
+        <ngb-alert type="success" (closed)="showSuccessDeletedRating=false;">
+          Rating successfully deleted.
+        </ngb-alert>
+      }
+
+      @if (showErrorDeletedRating) {
+        <ngb-alert type="danger" (closed)="showErrorDeletedRating=false;">
+          Couldn't delete rating.
+        </ngb-alert>        
+      }
+
         <h4 class="fst-italic">Recent posts</h4>
         <ul class="list-unstyled">
           @for (rating of ratings; track rating.id) {
@@ -26,10 +39,10 @@
                       </ng-template>
                     </ngb-rating>
 
-                    
-                      <i class="bi bi-x-circle-fill fs-3 ms-3 text-danger" style="cursor:pointer;" 
-                      (click)="deleteRating(rating)"></i>
-                    
+                      @if (rating.user?.id === userId || isAdmin) {
+                        <i class="bi bi-x-circle-fill fs-3 ms-3 text-danger" style="cursor:pointer;" 
+                        (click)="deleteRating(rating)"></i>
+                      }
 
                   </h6>
                   <small class="text-body-secondary">{{rating.comment}}</small>

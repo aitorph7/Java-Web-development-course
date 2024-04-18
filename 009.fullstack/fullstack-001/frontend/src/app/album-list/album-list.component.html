@@ -68,7 +68,7 @@
 
                 @if (isAdmin) {
                   <button class="btn btn-success ms-2 btn-sm" [routerLink]="['/albums', album.id, 'update']">Update</button>
-                  <button class="btn btn-danger ms-2 btn-sm" (click)="delete(album)">Delete</button>
+                  <button class="btn btn-danger ms-2 btn-sm" (click)="openModal(modal, album)">Delete</button>
                 }     
               </td>
             </tr>
@@ -80,3 +80,23 @@
 
   </div>
 </div>
+
+<ng-template #modal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Delete Album</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cancel')"></button>
+	</div>
+	<div class="modal-body">
+		<p>This action will delete the Album. It will be no longer accessible. ¿Are you sure?</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-success" (click)="modal.close('Accept')">
+      <i class="bi bi-check-lg me-2"></i>
+      Confirm
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Cancel')">
+      <i class="bi bi-x-circle me-2"></i>
+      Cancel
+    </button>
+	</div>
+</ng-template>

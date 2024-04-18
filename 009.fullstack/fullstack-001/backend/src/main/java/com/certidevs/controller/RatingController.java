@@ -1,5 +1,6 @@
 package com.certidevs.controller;
 
+import com.certidevs.exception.UnauthorizedException;
 import com.certidevs.model.Rating;
 import com.certidevs.model.Role;
 import com.certidevs.model.User;
@@ -47,8 +48,12 @@ public class RatingController {
         Rating rating = this.ratingRepository.findById(id).orElseThrow();
         User user = SecurityUtils.getAuthUser().orElseThrow();
 
-        if (user.getRole().equals(Role.ADMIN) || rating.getUser().getId().equals(user.getId()))
+        if (user.getRole().equals(Role.ADMIN) ||
+                (rating.getUser() != null && rating.getUser().getId().equals(user.getId()))
+        )
             this.ratingRepository.deleteById(id);
+        else
+            throw new UnauthorizedException("You're not allowed to delete this rating");
 
     }
 }

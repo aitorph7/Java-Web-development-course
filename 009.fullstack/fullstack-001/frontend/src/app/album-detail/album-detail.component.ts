@@ -3,13 +3,14 @@ import { Album } from '../model/album.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Rating } from '../model/rating.model';
-import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-album-detail',
   standalone: true,
-  imports: [RouterLink, NgbRatingModule, ReactiveFormsModule],
+  imports: [RouterLink, NgbRatingModule, ReactiveFormsModule, NgbAlertModule],
   templateUrl: './album-detail.component.html',
   styleUrl: './album-detail.component.css'
 })
@@ -21,11 +22,19 @@ export class AlbumDetailComponent implements OnInit{
     score: new FormControl(0),
     comment: new FormControl('')
   });
+  showSuccessDeletedRating = false;
+  showErrorDeletedRating = false;
+  userId = 0;
+  isAdmin = false;
 
   constructor(
     private activatedRoute: ActivatedRoute, // Porque lo necesito para acceder al param 'id' de la url.
-    private httpClient: HttpClient // Para llamar al controlador del backend y traer el dato.
-  ){}
+    private httpClient: HttpClient, // Para llamar al controlador del backend y traer el dato.
+    private authService: AuthenticationService
+  ){
+    this.authService.userId.subscribe((userId: any) => this.userId = userId);
+    this.authService.isAdmin.subscribe((isAdmin: any) => this.isAdmin = isAdmin);
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: any; }) => {
@@ -84,8 +93,13 @@ export class AlbumDetailComponent implements OnInit{
   deleteRating(rating: Rating){
     this.httpClient.delete('http://localhost:8080/ratings/' + rating.id)
     .subscribe({
-      next: (response: any) => this.loadRatings(),
-      error: (error: any)  => console.log(error)
+      next: (response: any) => {
+        this.loadRatings();
+        this.showSuccessDeletedRating = true;
+      },
+      error: (error: any)  => {
+        this.showErrorDeletedRating = true;
+      } // este enfoque de 'next & error' puedo usarlo en el 'login' y en el 'register'.
     });
   }
 }
