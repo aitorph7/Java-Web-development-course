@@ -18,7 +18,7 @@ public class SecurityConfig {
     private final RequestJWTFilter jwtFilter;
 
     // Cifrar la contraseña:
-    @Bean //para que sea accesible desde el otro lado.
+    @Bean //Para que sea accesible desde el otro lado.
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
@@ -39,6 +39,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("users/login").permitAll()
                 .requestMatchers("users/register").permitAll()
+                .requestMatchers("files/**").permitAll()
                 .requestMatchers("albums").permitAll() // permito ver álbumes por ser como la Home de mi aplicación.
                 .requestMatchers(HttpMethod.POST, "albums").hasAnyAuthority("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "albums").hasAnyAuthority("ADMIN")
