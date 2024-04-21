@@ -3,6 +3,7 @@ package com.certidevs.controller;
 import com.certidevs.dto.Login;
 import com.certidevs.dto.Register;
 import com.certidevs.dto.Token;
+import com.certidevs.exception.UnauthorizedException;
 import com.certidevs.model.Role;
 import com.certidevs.model.User;
 import com.certidevs.repository.UserRepository;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 @CrossOrigin("*")
 @RestController
-@AllArgsConstructor
+@AllArgsConstructor // Para asegurarme de que se hace bien la inyección de dependencias.
 @Slf4j
 public class UserController {
 
@@ -115,7 +116,7 @@ public class UserController {
             if (currentUser.getRole() == Role.ADMIN || Objects.equals(currentUser.getId(), user.getId())){
                 this.userRepository.save(user);
             } else {
-                throw new RuntimeException("No tiene permiso para actualizar"); // TODO reemplazar por excepción personalizada
+                throw new UnauthorizedException("No tiene permiso para actualizar este usuario7a");
             }
         });
         return user;

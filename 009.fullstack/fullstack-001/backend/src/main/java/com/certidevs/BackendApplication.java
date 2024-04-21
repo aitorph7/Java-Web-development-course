@@ -25,7 +25,7 @@ public class BackendApplication {
 		como 'Liquibase' o 'Flyway'.
 		
 		Todos estos datos en un futuro los reemplazaré con datos creados en un archivo
-		DATA.SQL; algo bastante habitual en este tipo de aplicaciones, que sea un script
+		DATA.SQL; algo bastante habitual en este tipo de aplicaciones; que sea un script
 		de SQL quien inserte los datos.
 		 */
 		AlbumRepository albumRepository = context.getBean(AlbumRepository.class);

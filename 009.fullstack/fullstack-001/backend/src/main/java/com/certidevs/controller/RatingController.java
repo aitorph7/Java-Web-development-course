@@ -53,7 +53,6 @@ public class RatingController {
         )
             this.ratingRepository.deleteById(id);
         else
-            throw new UnauthorizedException("You're not allowed to delete this rating");
-
+            throw new UnauthorizedException("You're not allowed to delete this rating.");
     }
 }

@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException exception){
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage()); // Error 401
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage()); // Error 403
     }
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<String> handleUnauthorizedException(UnauthorizedException exception){

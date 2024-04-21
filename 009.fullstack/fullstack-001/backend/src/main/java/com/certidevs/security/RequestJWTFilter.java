@@ -44,7 +44,7 @@ public class RequestJWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // 1. Extraer de la cabecera Authorization de la request.
+        // 1. Extraer de la cabecera Authorization de la request (extraer el token).
         String bearerToken = request.getHeader("Authorization");
         if (!StringUtils.hasLength(bearerToken) || !bearerToken.startsWith("Bearer")){
             filterChain.doFilter(request, response);
