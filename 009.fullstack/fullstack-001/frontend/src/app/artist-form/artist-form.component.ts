@@ -36,10 +36,10 @@ export class ArtistFormComponent implements OnInit{
       if (!id) return;
 
       this.httpClient.get<Artist>('http://localhost:8080/artists/' + id)
-      .subscribe((artist: any) => {
-        this.artistForm.reset(artist);
+      .subscribe((artistFromBackend: any) => {
+        this.artistForm.reset(artistFromBackend);
         this.isUpdate = true;
-        this.artist = artist;
+        this.artist = artistFromBackend;
       });
     });
   }
