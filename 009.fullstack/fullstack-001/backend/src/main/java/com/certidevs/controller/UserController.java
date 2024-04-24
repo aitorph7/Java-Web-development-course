@@ -38,7 +38,7 @@ public class UserController {
     public void register(@RequestBody Register register){
         // si el email está ocupado no registro al usuario
         if (this.userRepository.existsByEmail(register.email())){
-            throw new RuntimeException("Busy email");
+            throw new BadCredentialsException("Busy email. Please, choose another email address.");
         }
         // Crear el objeto User
         // Cifrar la contraseña con BCrypt

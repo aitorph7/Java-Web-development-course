@@ -2,11 +2,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Register } from '../authentication/register.dto';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -15,6 +16,10 @@ export class RegisterComponent {
   No necesita formBuilder porque voy creando a mano los objetos; lleva
   un poco más de trabajo.
   */
+
+  errorMessage = '';
+  successMessage = false;
+
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     // phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9}$')]),
@@ -23,6 +28,7 @@ export class RegisterComponent {
   },
   {validators: this.passwordConfirmValidator} // validador personalizado que comprueba 2 campos al mismo tiempo.
   );
+  
 
   constructor(private httpClient: HttpClient){}
   /* Lo habitual es que en lugar de inyectarlo de forma directa, llame a un servicio
@@ -48,9 +54,14 @@ export class RegisterComponent {
     }
     
     this.httpClient.post('http://localhost:8080/users/register', register)
-    .subscribe((response: any) => {
-      // Limpiar el formulario (o redirigir al login/home) tras enviar el registro al backend.
-      this.registerForm.reset();
+    .subscribe({
+      next: (response: any) => {
+        // navegar a login
+        this.registerForm.reset();
+        this.successMessage = true;
+      }, error: (response: any) => {
+        this.errorMessage = response.error;
+      }
     });
 
     

@@ -18,6 +18,7 @@ export class LoginComponent {
     email: [''],
     password: ['']
   });
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -35,9 +36,14 @@ export class LoginComponent {
     const url = 'http://localhost:8080/users/login';
     // método que envía los datos del login al backend, donde entra un
     // 'login' y sale un 'token':
-    this.httpClient.post<Token>(url, login).subscribe((response: any) => {
-      this.authService.saveToken(response.token);
-      this.router.navigate(['/albums']);
+    this.httpClient.post<Token>(url, login).subscribe({
+      next: (response: any) => {
+        this.authService.saveToken(response.token);
+        this.router.navigate(['/albums']);
+      },
+      error: (response: any) => {
+        this.errorMessage = response.error;
+       }
     });
   }
 }

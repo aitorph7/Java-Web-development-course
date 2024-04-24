@@ -22,6 +22,7 @@ public class Album {
     @Column(unique = true, nullable = false)
     private String catalogNumber;
     private Double price;
+    @Column()
     private Boolean published;
     private LocalDate releaseDate;
     @Enumerated(EnumType.STRING)
