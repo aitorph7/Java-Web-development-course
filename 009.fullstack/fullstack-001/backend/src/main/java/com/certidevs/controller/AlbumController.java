@@ -2,6 +2,7 @@ package com.certidevs.controller;
 
 import com.certidevs.exception.ConflictDeleteException;
 import com.certidevs.model.Album;
+import com.certidevs.model.Role;
 import com.certidevs.model.User;
 import com.certidevs.repository.AlbumRepository;
 import com.certidevs.repository.BookingRepository;
@@ -30,17 +31,24 @@ public class AlbumController {
     @GetMapping("albums")
     public List<Album> findAll(){
         log.info("REST request to findAll albums");
-        SecurityUtils.getAuthUser().ifPresent(System.out::println); // imprime por consola el usuario con un método...
+        User user = SecurityUtils.getAuthUser().orElseThrow();
+
+        if(user.getRole().equals(Role.ADMIN))
+            return this.albumRepository.findAll();
+        else
+            return this.albumRepository.findByPublishedTrue();
+
+//      SecurityUtils.getAuthUser().ifPresent(System.out::println); Imprime por consola el usuario con un método...
         // ... referenciado de Java; PROGRAMACIÓN FUNCIONAL: es como un 'if()' de 4 líneas de código:
-                    // Optional<User> userOptional = SecurityUtils.getAuthUser();
-                    // if (userOptional.isPresent()){
-                    // |     User user = userOptional.get();
-                    // |     System.out.println(user);
-                    // }
+        // Optional<User> userOptional = SecurityUtils.getAuthUser();
+        // if (userOptional.isPresent()){
+        // |     User user = userOptional.get();
+        // |     System.out.println(user);
+        // }
         // ... pero en 1 sola línea.
         // Cada vez que vaya a trabajar con un 'Optional' en su lugar puedo usar un '.ifPresent'
-        return this.albumRepository.findAll();
     }
+
     @GetMapping("albums/{id}")
     public ResponseEntity<Album> findById(@PathVariable Long id){
         Optional<Album> albumOptional = albumRepository.findById(id);
@@ -73,19 +81,19 @@ public class AlbumController {
     @DeleteMapping("albums/{id}")
     public void deleteById(@PathVariable Long id){
         // Opción 1: borar el libro, pero antes desasociar o borrar aquellos objetos que apunten al album.
-        try{
-            this.ratingRepository.deleteByAlbumId(id);
-            this.bookingRepository.deleteByAlbumId(id);
-            this.albumRepository.deleteById(id);
-        } catch (Exception e) {
-            log.error("Error deleting album", e);
-            throw new ConflictDeleteException("Unable to delete album");
-        }
+//        try{
+//            this.ratingRepository.deleteByAlbumId(id);
+//            this.bookingRepository.deleteByAlbumId(id);
+//            this.albumRepository.deleteById(id);
+//        } catch (Exception e) {
+//            log.error("Error deleting album", e);
+//            throw new ConflictDeleteException("Unable to delete album");
+//        }
 
 
-//        opción 2: desactivar/ archivar el album
-//        album = this.albumRepository.findById();
-//        album.setPublisehd(false)
-//        albumRepository.save(album)
+//      opción 2: desactivar/ archivar el album
+        Album album = this.albumRepository.findById(id).orElseThrow();
+        album.setPublished(false);
+        albumRepository.save(album);
     }
 }

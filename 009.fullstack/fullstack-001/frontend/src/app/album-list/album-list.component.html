@@ -20,66 +20,75 @@
 } @empty {
   <p>Oh Gosh! ain't no albums.</p>
 } -->
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Catalog Number</th>
-            <th scope="col">Price (USD)</th>
-            <th scope="col">Published</th>
-            <th scope="col">Release Date</th>
-            <th scope="col">Artist</th>
-            <th scope="col">Record Company</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (album of albums; track album.id) {
-            <tr>
-              <th scope="row">{{album.id}}</th>
-              <td>{{album.title}}</td>
-              <td>{{album.catalogNumber}}</td>
-              <td>{{album.price}}</td>
-              <td>
-                @if (album.published) {
-                  <span class="badge text-bg-success">Yes</span>
-                } @else {
-                  <span class="badge text-bg-danger">No</span>
-                }
-              </td>
-              <td>{{album.releaseDate | date:"yyyy/MM/dd"}}</td>
-              <td>
-                <a class="badge text-bg-secondary text-decoration-none" [routerLink]="['/artists', album.artist.id, 'detail']">
-                  {{album.artist.name}}
-                </a>
-              </td>
-              <td>
-                <a class="badge text-bg-warning text-decoration-none" [routerLink]="['/recordCompanies', album.recordCompany.id, 'detail']">
-                  {{album.recordCompany.name}}
-                </a>
-              </td>
-              <td>
-                <button class="btn btn-info btn-sm" [routerLink]="['/albums', album.id, 'detail']">View</button>
-                <button class="btn btn-warning ms-2 btn-sm" [routerLink]="['/albums', album.id, 'reserve']">Book it!</button>
 
-                @if (isAdmin) {
-                  <button class="btn btn-success ms-2 btn-sm" [routerLink]="['/albums', album.id, 'update']">Update</button>
-                  <button class="btn btn-danger ms-2 btn-sm" (click)="openModal(modal, album)">Delete</button>
-                }     
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-
+@if (showSpinner) {
+  <div clas="container text-center mt-5" style="width: 3rem; height: 3rem;">
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
-
   </div>
-</div>
+} @else {
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Catalog Number</th>
+              <th scope="col">Price (USD)</th>
+              <th scope="col">Published</th>
+              <th scope="col">Release Date</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Record Company</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (album of albums; track album.id) {
+              <tr>
+                <th scope="row">{{album.id}}</th>
+                <td>{{album.title}}</td>
+                <td>{{album.catalogNumber}}</td>
+                <td>{{album.price}}</td>
+                <td>
+                  @if (album.published) {
+                    <span class="badge text-bg-success">Yes</span>
+                  } @else {
+                    <span class="badge text-bg-danger">No</span>
+                  }
+                </td>
+                <td>{{album.releaseDate | date:"yyyy/MM/dd"}}</td>
+                <td>
+                  <a class="badge text-bg-secondary text-decoration-none" [routerLink]="['/artists', album.artist.id, 'detail']">
+                    {{album.artist.name}}
+                  </a>
+                </td>
+                <td>
+                  <a class="badge text-bg-warning text-decoration-none" [routerLink]="['/recordCompanies', album.recordCompany.id, 'detail']">
+                    {{album.recordCompany.name}}
+                  </a>
+                </td>
+                <td>
+                  <button class="btn btn-info btn-sm" [routerLink]="['/albums', album.id, 'detail']">View</button>
+                  <button class="btn btn-warning ms-2 btn-sm" [routerLink]="['/albums', album.id, 'reserve']">Book it!</button>
+  
+                  @if (isAdmin) {
+                    <button class="btn btn-success ms-2 btn-sm" [routerLink]="['/albums', album.id, 'update']">Update</button>
+                    <button class="btn btn-danger ms-2 btn-sm" (click)="openModal(modal, album)">Delete</button>
+                  }     
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+  
+      </div>
+  
+    </div>
+  </div>
+}
 
 <ng-template #modal let-modal>
 	<div class="modal-header">

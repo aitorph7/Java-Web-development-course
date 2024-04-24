@@ -20,6 +20,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 export class AlbumListComponent implements OnInit{
   albums: Album[] = [];
   isAdmin = false;
+  showSpinner = true;
   
   constructor(
     private httpClient: HttpClient,
@@ -50,6 +51,7 @@ export class AlbumListComponent implements OnInit{
     const url = 'http://localhost:8080/albums';
     this.httpClient.get<Album[]>(url).subscribe((albums: Album[]) => {
       this.albums = albums;
+      this.showSpinner = false;
     });
   }
 
